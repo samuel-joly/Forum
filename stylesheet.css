@@ -1,0 +1,250 @@
+body {
+	background:#73CFC9
+}
+
+
+main {
+	display:flex;
+}
+
+.flex {
+	display:flex;
+}
+
+.flexc {
+	display:flex;
+	flex-direction:column;
+}
+
+.center {
+	align-self:center;
+}
+
+.just-betw {
+	justify-content:space-between;
+}
+
+.just-around {
+	justify-content:space-around;
+}
+
+.a-null {
+	text-decoration:none;
+	color:black;
+}
+/*---------------------------------------- FORUM ----------------------------------------*/
+
+.forum-box {
+	height:95vh;
+	width:33%;
+	
+	border-radius:10px;
+	bordeR:2px solid black;
+	
+	margin:10px 10px 0px 10px;
+	overflow-Y:scroll;
+}
+
+.forum-box>div {
+	border-radius:10px;
+	margin:5px;
+	transition:background 0.15s ease
+}
+
+.forum-box::-webkit-scrollbar {
+	width: 10px;
+}
+
+.forum-box::-webkit-scrollbar-track {
+	border-radius:0px 10px 10px 0px;
+}
+
+.forum-box::-webkit-scrollbar-thumb {
+	background: #888;
+	border-radius:10px 10px 10px 10px;
+}
+
+.forum-box::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+#topic-box , #topic-box::-webkit-scrollbar-track{
+	background-color:#78C0E0;
+}
+
+#topic-box::-webkit-scrollbar-thumb {
+	background:#B5DCEE;
+}
+
+#discussion-box , #discussion-box::-webkit-scrollbar-track{
+	background-color:#449DD1;	
+}
+
+#discussion-box::-webkit-scrollbar-thumb {
+	background:#99C9E5;
+}
+
+#message-box , #message-box::-webkit-scrollbar-track{
+	background-color:#6C78D8;
+}
+
+#message-box::-webkit-scrollbar-thumb {
+	background:#AEB5E9;
+}
+
+
+.topic {
+	min-height:150px;
+	background-color:#B5DCEE;
+}
+
+.topic:hover {
+	background-color:#84A1AE;
+}
+
+.discussion {
+	background-color:#99C9E5;
+}
+
+.discussion:hover {
+	background-color:#7093A7;
+}
+
+.message {
+	min-height:75px;
+	background-color:#AEB5E9;
+}
+
+.message:hover {
+	background-color:#7F84AA;
+}
+
+.message>*{
+	margin:5px;
+}
+
+.currTopic {
+	background:#84A1AE;
+}
+
+.currDiscussion {
+	background:#7093A7;
+}
+
+.topicPic {
+	width:100px;
+	height:80px;
+	border:4px solid black;
+	border-radius:10px;
+	background-size:100% 100%;
+	align-self:center;
+}
+
+.topic-title {
+	font-size:1.5em;
+	margin-top:0px;
+}
+
+.topic-infos {
+	margin:auto;
+	width:70%;
+}
+
+.topic-infos span {
+	margin:auto;
+	text-decoration:underline;
+}
+
+.stat-value b{
+	font-size:1.3em;
+	text-align:center;
+}
+
+.created-zone {
+	margin:5px;
+}
+
+
+.created-zone b {
+	text-align:center;
+	margin:auto;
+}
+
+.date{
+	
+}
+
+.disc-profil {
+	margin:5px;
+	width:100%;
+}
+
+.disc-profilPic {
+	width:70px;
+	height:70px;
+	
+	border:4px solid black;
+	border-radius:10px;
+}
+
+.disc-info-auteur {
+	text-align:left;
+	margin-top:0px;
+	margin-left:5px;
+	font-size:1.1em;
+}
+
+.disc-titre {
+	font-size:1.5em;
+}
+
+.disc-stat b
+{
+	text-align:center;
+	font-size:1.5em;
+}
+
+.disc-stat {
+	margin:5px;
+	align-self:center;
+	font-size:1.2em;
+}
+
+
+#disc-form input[type="text"]{
+	width:80%;
+	height:20px;
+	font-size:1.2em;
+	border-radius:7.5px;
+	border:0px;
+	margin:10px;
+}
+
+#disc-form input[type="submit"] {
+	background-color:#78C0E0;
+	border-radius:5px;
+	border:0px;
+	font-size:1.2em;
+	margin-top:1px;
+	cursor:pointer;
+	transition:background 0.15s ease;
+}
+
+#disc-form input[type="submit"]:hover {
+	background:#7093A7;
+}
+
+#disc-form textarea{
+	min-width:80%;
+	min-height:40px;
+	max-width:80%;
+	font-size:1.2em;
+	border-radius:7.5px;
+	margin:10px;
+	border:0px;
+}
+
+.msg-submit {
+	position:relative;
+	bottom:25px;
+}
