@@ -157,7 +157,7 @@ if(!isset($_SESSION['login']))
                                          //verif extention
                                              if (in_array($extensionupload, $extensionvalide)) 
                                              {echo "salade";
-                                               $chemin = "avatars".".".$_SESSION['id'].".".$extensionupload;
+                                               $chemin = "avatars/".".".$_SESSION['id'].".".$extensionupload;
                                                $couenta = move_uploaded_file($_FILES['image']['tmp_name'], $chemin);
                                                     if ($couenta)
                                                      {
