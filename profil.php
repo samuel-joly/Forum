@@ -54,13 +54,17 @@ if(!isset($_SESSION['login']))
   $reqimg = ("SELECT profilPic FROM utilisateurs WHERE id = $id");
   $reqimgco = mysqli_query($connexion,$reqimg);
   $imgrecup = mysqli_fetch_array($reqimgco);
-  var_dump($imgrecup);
-  echo $imgrecup[0];
 if (!empty($imgrecup[0])) 
 {
   # code...
 ?>
 <img class = "oc-img-profil" src="<?php echo $imgrecup[0] ; ?>" > 
+<?php
+}
+else
+{
+ ?>
+<img class = "oc-img-profil" src="profilPics/profil.jpg" >
 <?php
 }
 ?>
@@ -124,14 +128,14 @@ if (!empty($imgrecup[0]))
        {       
       
          
-         echo "1";
+       
        if (!empty($_POST['login']) && !empty($_POST['password']) && !empty($_POST['password2'])) 
        {
-                echo "2";
+               
                               
             if (($_POST['password']) == ($_POST['password2']))  
                  {    
-                  echo "3s";
+                 
                   $login= htmlspecialchars($_POST["login"]);
                   $password= password_hash($_POST["password"], PASSWORD_DEFAULT,array('cost'=> 12));
                   $reqdoublon = "SELECT pseudo FROM `utilisateurs` where pseudo =\"$login\";";
@@ -142,7 +146,7 @@ if (!empty($imgrecup[0]))
 
 
                            if($retour==0)
-                           {         echo "4";     
+                           {             
                          //  echo "test";
                           // $ocnewimg = $_POST['image'];           
                            //$requeteupdate ="UPDATE utilisateurs SET pseudo = '$login', profilPic = 'profilpics/$ocnewimg' , mdp = '$password' WHERE id='$id'"; 
@@ -154,21 +158,21 @@ if (!empty($imgrecup[0]))
                               //enregistrement de limage
                                if (isset($_FILES['image']))
                                 { 
-                                 echo "string";
+                                 
                                    $taillemax = 2097152 ;  
                                    $extensionvalide = array('jpg', 'jpeg', 'gif', 'png');  
                                      if ($_FILES['image']['size'] <= $taillemax)
-                                      { echo "bannane";
+                                      { 
                                         // met tous les carractere en minuscule                                    1=limite de chaine
                                          $extensionupload = strtolower(substr(strchr($_FILES['image']['name'],'.'), 1));
                                          //verif extention
                                              if (in_array($extensionupload, $extensionvalide)) 
-                                             {echo "salade";
-                                               $chemin = "avatars/".".".$_SESSION['id'].".".$extensionupload;
+                                             {
+                                               $chemin = "profilPics/".".".$_SESSION['id'].".".$extensionupload;
                                                $couenta = move_uploaded_file($_FILES['image']['tmp_name'], $chemin);
                                                     if ($couenta)
                                                      {
-                                                      echo "tomate";
+                                                      
                                                       $requeteupdate ="UPDATE utilisateurs SET pseudo = '$login', profilPic = '$chemin' , mdp = '$password' WHERE id='$id'"; 
                          
                                                       $inser= mysqli_query($connexion,$requeteupdate);

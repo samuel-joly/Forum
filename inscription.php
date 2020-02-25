@@ -36,7 +36,7 @@ if (!empty($_POST["submit"]))
                  	 //si utilisateur existe deja
 
                   $login= htmlspecialchars($_POST["login"]);
-                  $img = $_POST['image'];
+                 
                   $password= password_hash($_POST["password"], PASSWORD_DEFAULT,array('cost'=> 12));
                   $reqdoublon = "SELECT pseudo FROM `utilisateurs` where pseudo=\"$login\";";           
                   $req=mysqli_query($connexion,$reqdoublon);               
@@ -45,14 +45,14 @@ if (!empty($_POST["submit"]))
                            if($retour==0)
                            {         
                                                   
-
+                            $help = "profilPics/profil.jpg";
                             $requete="INSERT INTO utilisateurs (pseudo,profilPic,mdp)
-                            VALUES (\"$login\",\"profilPics/$img\",\"$password\")";    
-                            var_dump($requete);            
+                            VALUES (\"$login\",\"$help\",\"$password\")";    
+                                       
                             $inser= mysqli_query($connexion, $requete);
-                            var_dump($inser);
-                          //   header("location: connexion.php");
-                            echo "passe";
+                        
+                             header("location: connexion.php");
+                          
                             
                             
 
@@ -86,14 +86,7 @@ if (!empty($_POST["submit"]))
               <input type="text" name="login" placeholder="ecrire votre pseudo" value="<?php if(isset($login)){echo $login;} ?>">
             </td>
           </tr>
-          <tr>
-          	<td>
-          		<label for="image">inserer votre image de profil : </label>
-          	</td>
-          	<td>
-          		<input type="file" name ="image">
-          	</td>
-          </tr>
+       
           <tr>
               <td>
                 
@@ -111,14 +104,7 @@ if (!empty($_POST["submit"]))
                 <input type="password" name="password2" placeholder="ecrire votre mot de passe">
               </td>
           </tr>
-          <tr>
-            <td>
-              <label for ="fileimg">avatar :</label>
-            </td>
-            <td>
-              <input type="file" name="fileimg"/>
-            </td>
-          </tr>
+          
           
         </table>
         <br/>
