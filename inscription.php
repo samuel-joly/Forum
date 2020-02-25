@@ -14,15 +14,15 @@
   
 
 					 <!--HEADER ADMIN -->
-     <section class="section-deventure">      
+     <section class="oc-section-deventure">      
      	<main>
-     		<header class="oc-header-btp">
+     		<header class="">
 <?php         
             	include ('header.php'); 
 ?>
         	</header>
-             	<h1>Insrivez-vous !<h1>
-                        <form class="form" method="POST" action=""  >
+             	<h1 class="oc-titre-inscr">Insrivez-vous !<h1>
+                        <form class="oc-form" method="POST" action=""  >
 <?php
 
 
@@ -77,7 +77,7 @@ if (!empty($_POST["submit"]))
 
 ?> 
 
- <table class="oc-tablinscri">
+ <table class="oc-tablinscri" class="oc-tableconnexionprofil ">
           <tr>
             <td>
               <label  for="login"> login :</label>
