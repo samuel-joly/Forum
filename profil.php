@@ -19,26 +19,24 @@
 
 <?php
 
-
-
  $connexion=mysqli_connect("localhost","root","","forum");
 $log=$_SESSION['login'];
 $id=$_SESSION['id'];
-if(!isset($_SESSION['login']))
-{
-    header("location: connexion.php");
-}
+    if(!isset($_SESSION['login']))
+    {
+      header("location: connexion.php");
+    }
 
 
 
 
 
                //si on clique sur la deconnexion
- if (!empty($_POST['deconection'])) 
-   {    
+    if (!empty($_POST['deconection'])) 
+    {    
     unset ( $_SESSION ['id'] );
     unset ($_SESSION['login']); 
-   header("location: index.php");
+    header("location: index.php");
     }
     $ocreqnom = ("SELECT pseudo FROM utilisateurs WHERE id = $id");
     $fusionreq = mysqli_query($connexion,$ocreqnom);
@@ -54,19 +52,19 @@ if(!isset($_SESSION['login']))
   $reqimg = ("SELECT profilPic FROM utilisateurs WHERE id = $id");
   $reqimgco = mysqli_query($connexion,$reqimg);
   $imgrecup = mysqli_fetch_array($reqimgco);
-if (!empty($imgrecup[0])) 
-{
-  # code...
+     if (!empty($imgrecup[0])) 
+     {
+     # code...
 ?>
-<img class = "oc-img-profil" src="<?php echo $imgrecup[0] ; ?>" > 
+     <img class = "oc-img-profil" src="<?php echo $imgrecup[0] ; ?>" > 
 <?php
-}
-else
-{
- ?>
-<img class = "oc-img-profil" src="profilPics/profil.jpg" >
-<?php
-}
+     }
+         else
+         {
+           ?>
+           <img class = "oc-img-profil" src="profilPics/profil.jpg" >
+           <?php
+         }
 ?>
        
 
@@ -147,15 +145,32 @@ else
 
                            if($retour==0)
                            {             
-                         //  echo "test";
-                          // $ocnewimg = $_POST['image'];           
-                           //$requeteupdate ="UPDATE utilisateurs SET pseudo = '$login', profilPic = 'profilpics/$ocnewimg' , mdp = '$password' WHERE id='$id'"; 
+                           echo "test";
+                           $ocnewimg = $_POST['image'];           
+                           $requeteupdate ="UPDATE utilisateurs SET pseudo = '$login' , mdp = '$password' WHERE id='$id'"; 
                          
-                           //  $inser= mysqli_query($connexion,$requeteupdate);
+                             $inser= mysqli_query($connexion,$requeteupdate);
                           
-                       ;
+                       
                           
-                              //enregistrement de limage
+                                
+
+                          } 
+                          else
+                          {
+                            echo "ce login existe deja !";
+                          }
+               }
+               else
+               {
+                echo "les passwords ne sont pas identiques !";
+               }
+    }
+  else
+  {
+    echo "tous les champs doivent etre complétés !";
+  }
+  //enregistrement de limage
                                if (isset($_FILES['image']))
                                 { 
                                  
@@ -173,7 +188,7 @@ else
                                                     if ($couenta)
                                                      {
                                                       
-                                                      $requeteupdate ="UPDATE utilisateurs SET pseudo = '$login', profilPic = '$chemin' , mdp = '$password' WHERE id='$id'"; 
+                                                      $requeteupdate ="UPDATE utilisateurs SET  profilPic = '$chemin'  WHERE id='$id'"; 
                          
                                                       $inser= mysqli_query($connexion,$requeteupdate);
                                                            header("location: profil.php");
@@ -193,23 +208,7 @@ else
                                         echo "votre foto ne doit pas depasser 2 mo";
                                       }
                                  }   
-                                 //fin avatar    
-
-                          } 
-                          else
-                          {
-                            echo "ce login existe deja !";
-                          }
-               }
-               else
-               {
-                echo "les passwords ne sont pas identiques !";
-               }
-    }
-  else
-  {
-    echo "tous les champs doivent etre complétés !";
-  }
+                                 //fin avatar  
 }
 
 
