@@ -1,9 +1,10 @@
 .oc-img-profil
 {
-	border: solid #5b036d 3PX;
+	border: solid #07829ade 3PX;
     width: 14%;
     height: 26%;
     border-radius: 100%;
+    box-shadow: #0039a2 5px 5px 11PX;
 }
 .section-deventure
 {
@@ -14,15 +15,70 @@
 }
 .oc-tablinscri
 {
-	margin: auto;
-    background-color: #695a91c2;
+    margin: auto;
+    background-color: #091114a1;
     padding: 3%;
-    border: #5b036d solid 3px;
+    border: #07829ade solid 3px;
     margin-top: 3%;
-    box-shadow: #a20000 5px 5px 11PX;
+    box-shadow: #0039a2 5px 5px 11PX;
     color: white;
+}
+.buton-inscription
+{
+    width: 14%;
+    border: none;
+    padding: 6px 0 6px 0;
+    border-radius: 8px;
+    background: #00bcd4ba;
+    font: bold 13px Arial;
+    color: #fff;
+    box-shadow: 2px 2px black;
 }
 .oc-titreh
 {
 	    color: white;
+        font-size: 30px;
+    font-family: cursive;
+    text-shadow: 2px 2px #448dee;
+}
+.oc-tablinscri
+ {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+    -webkit-animation-duration: 1s;
+    animation-duration: 3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+  
+  @-webkit-keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      -webkit-transform: translate3d(0, -100%, 0);
+      transform: translate3d(0, -100%, 0);
+    }
+    100% {
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
+    }
+  }
+  
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      -webkit-transform: translate3d(0, -100%, 0);
+      transform: translate3d(0, -100%, 0);
+    }
+    100% {
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
+    }
+  }
+  
+  @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+  @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
 }
