@@ -54,10 +54,17 @@ if(!isset($_SESSION['login']))
   $reqimg = ("SELECT profilPic FROM utilisateurs WHERE id = $id");
   $reqimgco = mysqli_query($connexion,$reqimg);
   $imgrecup = mysqli_fetch_array($reqimgco);
-
+  var_dump($imgrecup);
+  echo $imgrecup[0];
+if (!empty($imgrecup[0])) 
+{
+  # code...
 ?>
-
-      <img class = "oc-img-profil" src="<?php echo $imgrecup[0];?>" >  
+<img class = "oc-img-profil" src="<?php echo $imgrecup[0] ; ?>" > 
+<?php
+}
+?>
+       
 
   
 
@@ -142,7 +149,7 @@ if(!isset($_SESSION['login']))
                          
                            //  $inser= mysqli_query($connexion,$requeteupdate);
                           
-                           // header("location: profil.php");
+                       ;
                           
                               //enregistrement de limage
                                if (isset($_FILES['image']))
@@ -162,9 +169,10 @@ if(!isset($_SESSION['login']))
                                                     if ($couenta)
                                                      {
                                                       echo "tomate";
-                                                      $requeteupdate ="UPDATE utilisateurs SET pseudo = '$login', profilPic = 'profilpics/$chemin' , mdp = '$password' WHERE id='$id'"; 
+                                                      $requeteupdate ="UPDATE utilisateurs SET pseudo = '$login', profilPic = '$chemin' , mdp = '$password' WHERE id='$id'"; 
                          
-                             $inser= mysqli_query($connexion,$requeteupdate);
+                                                      $inser= mysqli_query($connexion,$requeteupdate);
+                                                           header("location: profil.php");
                                                      }
                                                      else
                                                      {
