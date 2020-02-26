@@ -6,29 +6,20 @@
 		<title>admin</title>
 	</head>
 
+
 	<body>
-		<?php 
-			include("header.php"); 
+
+		    <header>
+		    	<?php 
+		    	include("header.php"); 
 			
-			if(isset($_SESSION["errCo"])) {	
-				if(!isset($_SESSION["errcoCount"])) {
+		    	      if (empty($_SESSION['login']) or $_SESSION['login'] != "admin")
+		    	       {
+		    	      	 header('Location: connexion.php');
+		    	      }
+		       ?>
+	    </header>
 
-					if($_SESSION["errCo"] > 0) {			
-						echo "Il vous reste ".$_SESSION["errCo"]." esssais";
-					}
-					else {
-						$_SESSION["errcoCount"] = getdate()[0];
-						header("location:connexion.php");
-					}
-				}
-				else {
-					echo "Vous etes bloqués pendant 60 secondes";
-					if(getdate()[0] - $_SESSION["errcoCount"] > 60) {
-						unset($_SESSION["errcoCount"]);
-						unset($_SESSION["errCo"]);
+	</body>
 
-						header("location:connexion.php");
-					}
-				}				
-			}	
-		?>
+</html>
