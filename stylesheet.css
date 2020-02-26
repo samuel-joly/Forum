@@ -1,5 +1,7 @@
 body {
-	background:#73CFC9
+	background:#73CFC9;
+	margin:0;
+	padding:0;
 }
 
 
@@ -20,7 +22,7 @@ main {
 	align-self:center;
 }
 
-.just-betw {
+.just-between {
 	justify-content:space-between;
 }
 
@@ -32,6 +34,21 @@ main {
 	text-decoration:none;
 	color:black;
 }
+
+/*---------------------------------------- HEADER ----------------------------------------*/
+
+header
+{
+	
+}
+
+.head-foot
+{
+	padding:1em 1em 1em 1em;
+	background:#e4e4e4;
+	height:1.2em;
+}
+
 /*---------------------------------------- FORUM ----------------------------------------*/
 
 .forum-box {
@@ -210,8 +227,13 @@ main {
 	font-size:1.2em;
 }
 
+.disc-form
+{
+	display:flex;
+	
+}
 
-#disc-form input[type="text"]{
+.disc-form input[type="text"]{
 	width:80%;
 	height:20px;
 	font-size:1.2em;
@@ -220,7 +242,7 @@ main {
 	margin:10px;
 }
 
-#disc-form input[type="submit"] {
+.disc-form input[type="submit"] {
 	background-color:#78C0E0;
 	border-radius:5px;
 	border:0px;
@@ -228,13 +250,15 @@ main {
 	margin-top:1px;
 	cursor:pointer;
 	transition:background 0.15s ease;
+	height:2em;
+	align-self:center;
 }
 
-#disc-form input[type="submit"]:hover {
+.disc-form input[type="submit"]:hover {
 	background:#7093A7;
 }
 
-#disc-form textarea{
+.disc-form textarea{
 	min-width:80%;
 	min-height:40px;
 	max-width:80%;
@@ -245,6 +269,5 @@ main {
 }
 
 .msg-submit {
-	position:relative;
-	bottom:25px;
+	
 }

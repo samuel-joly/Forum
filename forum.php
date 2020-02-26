@@ -62,7 +62,7 @@
 					
 					if(isset($_SESSION["id"])) {  ?>
 					
-						<form action="<?php echo "forum.php?topic=".$_GET["topic"]; ?>" method="post" id="disc-form">
+						<form action="<?php echo "forum.php?topic=".$_GET["topic"]; ?>" method="post" class="disc-form">
 							<input type="text" name="discTitle"/>
 							<input type="submit" name="submitDisc" value="Envoyer"/>
 						</form>
@@ -82,12 +82,10 @@
 						}
 						
 						if(isset($_SESSION["id"])) {	?>
-					
-							 <form action="" method="post" id="disc-form">
+							 <form action="" method="post" class=" disc-form">
 								<textarea name="msg" cols="20" row="10"></textarea>
 								<input type="submit" name="submitMsg" value="Envoyer" class="msg-submit"/>
 							</form>
-					
 					<?php
 						}
 					}
@@ -98,8 +96,7 @@
 		
 		</main>
 
-		<footer>
-		</footer>
+		<?php include("footer.php"); ?>
 	</body>
 
 </html>

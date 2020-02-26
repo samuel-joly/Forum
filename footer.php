@@ -1,7 +1,5 @@
 <?php 
-	session_start();
-	include("function.php");
-	
+
 	if(isset($_GET["deco"]))
 	{
 		session_destroy();
@@ -11,7 +9,7 @@
 
 
 
-<header class="flex just-between head-foot">
+<footer class="flex just-between head-foot">
 	<?php  if(!isset($_SESSION["id"])) { ?>
 		<a href="connexion.php">Connexion</a>
 		<a href="inscription.php">Inscription</a>
@@ -26,4 +24,4 @@
 	<?php if(isset($_SESSION["login"]) == "admin") { ?>
 		<a href="admin.php">Admin</a>
 	<?php } ?>
-</header>
+</footer>
