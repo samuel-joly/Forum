@@ -18,12 +18,13 @@
 		
 	<a href="forum.php">Forums</a>
 	
-	<?php if(isset($_SESSION["admin"])) { ?>
+	<?php if(isset($_SESSION["login"]) == "admin") { ?>
 		<a href="admin.php">Admin</a>
 	<?php } ?>
 	<?php if (isset($_POST["oc-deco"])) { 
 		session_destroy();
 	}
+	
 	?>
 		
 
