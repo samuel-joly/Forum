@@ -23,7 +23,12 @@
 		
 	<a href="forum.php">Forums</a>
 	
-	<?php if(isset($_SESSION["login"]) == "admin") { ?>
+	<?php if(!empty($_SESSION["login"]) ) 
+	{
+	  if ($_SESSION["login"] == "admin" ) 
+	   { ?>
+   
 		<a href="admin.php">Admin</a>
-	<?php } ?>
+	   <?php }
+	}	   ?>
 </header>
