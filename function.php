@@ -7,7 +7,7 @@
 				break;
 			}
 		}
-		return true;
+		return   true;
 	}
 	
 	function sql_request($request, bool $isData=false, bool $isSingle=false) {
