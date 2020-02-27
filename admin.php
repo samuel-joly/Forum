@@ -15,7 +15,7 @@
 			
 		    	      if (empty($_SESSION['login']) or $_SESSION['login'] != "admin")
 		    	       {
-		    	      	 header('Location: connexion.php');
+		    	      	header('Location: connexion.php');
 		    	      }
 		       ?>
 	    </header>

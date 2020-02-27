@@ -4,6 +4,7 @@
 <head>
 	   <meta charset="utf-8">
      <link rel="stylesheet" type="text/css" href="css/profil.css">
+     <link rel="stylesheet" type="text/css" href="stylesheet.css">
 
      <title>profil</title>
 </head>
@@ -14,7 +15,7 @@
      <section class="section-deventure">    
      <!-- HEADER-->  
   <header class="oc-header-btp">
-           <?php include ('header.php'); ?>  
+           <?php include('header.php'); ?>  
   </header>
 
 <?php
@@ -187,11 +188,10 @@ $id=$_SESSION['id'];
                                                $couenta = move_uploaded_file($_FILES['image']['tmp_name'], $chemin);
                                                     if ($couenta)
                                                      {
-                                                      
                                                       $requeteupdate ="UPDATE utilisateurs SET  profilPic = '$chemin'  WHERE id='$id'"; 
                          
                                                       $inser= mysqli_query($connexion,$requeteupdate);
-                                                           header("location: profil.php");
+                                                      header("location: profil.php");
                                                      }
                                                      else
                                                      {
