@@ -9,7 +9,9 @@
 
 	<body>
 		<?php include("header.php");
-
+			
+			$stmt = new PDO("mysql:host=localhost;dbname=forum","root","");
+			
 			if(isset($_POST["submitDisc"])) {
 				if(!empty($_POST["discTitle"])){
 					$titre = escapeshellarg(htmlspecialchars($_POST["discTitle"]));
@@ -26,6 +28,39 @@
 					VALUES (NULL, '".$_SESSION["id"]."', ".$message." , ".$_GET["discussion"]." , CURRENT_TIMESTAMP)");
 				}
 				header("location:forum.php?topic=".$_GET["topic"]."&&discussion=".$_GET["discussion"]);
+			}
+			
+			if(isset($_SESSION["id"]) && (isset($_GET["like"]) || isset($_GET["dislike"])))
+			{
+				if(isset($_GET["like"]))
+				{
+					if( empty($stmt->query("SELECT * FROM likes WHERE id_utilisateur = ".$_SESSION["id"]." AND id_message =".$_GET["like"])->fetch()[0]))
+					{
+						$stmt->query("INSERT INTO likes (id, id_utilisateur, id_message) VALUE(NULL, ".$_SESSION["id"].", ".$_GET["like"]." )");
+						
+						if(!empty($stmt->query("SELECT * FROM likes WHERE id_utilisateur = ".$_SESSION["id"]." AND id_message =".$_GET["like"])->fetch()[0]))
+						{
+							$stmt->query("DELETE FROM dislikes WHERE id_utilisateur = ".$_SESSION["id"]." AND id_message=".$_GET["like"]);
+						}
+					}
+					$discussion_id = $stmt->query("SELECT id_discussion FROM messages WHERE id=".$_GET["like"])->fetch()[0];
+					$topic_id = $stmt->query("SELECT id_topic FROM discussions WHERE id=".$discussion_id)->fetch()[0];						
+				}
+				else if(isset($_GET["dislike"]))
+				{
+					if(	empty($stmt->query("SELECT * FROM dislikes WHERE id_utilisateur = ".$_SESSION["id"]." AND id_message =".$_GET["dislike"])->fetch()[0]))
+					{
+						$stmt->query("INSERT INTO dislikes (id, id_utilisateur, id_message) VALUE(NULL, ".$_SESSION["id"].", ".$_GET["dislike"]." )");
+						if(!empty($stmt->query("SELECT * FROM dislikes WHERE id_utilisateur = ".$_SESSION["id"]." AND id_message =".$_GET["dislike"])->fetch()[0]))
+						{
+							$stmt->query("DELETE FROM likes WHERE id_utilisateur = ".$_SESSION["id"]." AND id_message=".$_GET["dislike"]);
+						}
+					}
+					$discussion_id = $stmt->query("SELECT id_discussion FROM messages WHERE id=".$_GET["dislike"])->fetch()[0];
+					$topic_id = $stmt->query("SELECT id_topic FROM discussions WHERE id=".$discussion_id)->fetch()[0];
+				}
+				
+				header("location:forum.php?topic=".$topic_id."&&discussion=".$discussion_id);	
 			}
 
 		?>
@@ -100,3 +135,10 @@
 	</body>
 
 </html>
+
+
+<?php
+	
+
+
+?>

@@ -85,6 +85,7 @@
 			INNER JOIN topics ON discussions.id_topic = topics.id
 			WHERE discussions.id =".$topic_id, true, true);
 			
+			
 			$profilPic = sql_request("SELECT utilisateurs.profilPic FROM utilisateurs
 			INNER JOIN discussions ON utilisateurs.id = discussions.id_createur
 			WHERE discussions.id=".$topic_id,true,true);
@@ -92,7 +93,7 @@
 			return"<div class='flexc discussion ".currTopic($topic_id, true)."'>
 					<a class='a-null flex just-betw' href='forum.php?topic=".$_GET["topic"]."&&discussion=".$topic_id."'>	
 						
-						<div class='flex just-center disc-profil'>
+						<div class='flex disc-profil'>
 							<img class='disc-profilPic' src='".$profilPic[0]."'/>
 							<p class='flexc disc-info-auteur'>
 								<u>".$creator."</u> 
@@ -109,8 +110,58 @@
 			return "<div class='message'>
 						<p>Par <u>".$creator."</u> le ".$date."</p>
 						<h3>".$message."</h3>
+						".get_likes($topic_id)."
 				  </div>";
 		}
+	}
+	
+	function get_likes($id)
+	{
+		$likes = sql_request("SELECT COUNT(*) FROM likes WHERE id_message = ".$id,true,true)[0];
+		$dislikes = sql_request("SELECT COUNT(*) FROM dislikes WHERE id_message = ".$id,true,true)[0];
+		
+		$returned = "<div class='flex just-center like-zone'>";
+		if(isset($_SESSION["id"]))
+		{
+			if(!empty(sql_request("SELECT id_utilisateur FROM likes WHERE id_message =".$id." AND id_utilisateur = ".$_SESSION["id"],true,true)))
+			{ 
+				$returned .= "<div class='flexc just-center'>";
+				$returned .= "<a href='forum.php?unlike=".$id."'><img src='Images/liked.png' class='thumb-btn'></a>";
+				$returned .= "<p>".$likes."</p></div>";
+			}
+			else
+			{
+				$returned .= "<div class='flexc just-center'>";
+				$returned .= "<a href='forum.php?like=".$id."'><img src='Images/like.png' class='thumb-btn'></a>";
+				$returned .= "<p>".$likes."</p></div>";
+			}
+				
+			if(!empty(sql_request("SELECT id_utilisateur FROM dislikes WHERE id_message =".$id." AND id_utilisateur = ".$_SESSION["id"],true,true)))
+			{ 
+				$returned .= "<div class='flexc just-center center'>";
+				$returned .= "<a href='forum.php?undislike=".$id."'><img src='Images/disliked.png' class='thumb-btn'></a>";
+				$returned .= "<p>".$dislikes."</p></div>";
+			}
+			else
+			{
+				$returned .= "<div class='flexc just-center'>";
+				$returned .= "<a href='forum.php?dislike=".$id."'><img src='Images/dislike.png' class='thumb-btn'></a>";
+				$returned .= "<p>".$dislikes."</p></div>";
+			}
+		}
+		else
+		{ 
+			$returned .= "<div class='flexc just-center'>";
+			$returned .= "<a href='connexion.php'><img src='Images/like.png' class='thumb-btn'></a>";
+			$returned .= "<p>".$likes."</p></div>";
+			$returned .= "<div class='flexc just-center'>";
+			$returned .= "<a href='connexion.php'><img src='Images/dislike.png' class='thumb-btn'></a>";	
+			$returned .= "<p>".$dislikes."</p></div>";
+		}
+		
+		$returned .= "</div>";
+		
+		return $returned;
 	}
 
 ?>

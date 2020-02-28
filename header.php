@@ -29,6 +29,6 @@
 	   { ?>
    
 		<a href="admin.php">Admin</a>
-	   <?php }
+<?php  }
 	}	   ?>
 </header>

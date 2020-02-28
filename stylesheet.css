@@ -30,6 +30,11 @@ main {
 	justify-content:space-around;
 }
 
+.just-center
+{
+	justify-content:center;
+}
+
 .a-null {
 	text-decoration:none;
 	color:black;
@@ -128,8 +133,10 @@ header
 }
 
 .message {
-	min-height:75px;
 	background-color:#AEB5E9;
+	max-width:100%;
+	height:fit-content;
+	word-wrap:break-word;
 }
 
 .message:hover {
@@ -268,6 +275,30 @@ header
 	border:0px;
 }
 
-.msg-submit {
-	
+.thumb-btn
+{
+	height:20px;
+	transition:all 0.3s ease;
+	margin-top:-3px;
+}
+
+.thumb-btn:hover
+{
+	transform:rotate(20deg);
+}
+
+.like-zone
+{
+	width:4em;
+}
+
+.like-zone div
+{
+	margin:3px;
+}
+
+.like-zone div p
+{
+	margin-top:0px;
+	text-align:center;
 }
