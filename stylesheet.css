@@ -57,20 +57,23 @@ header
 /*---------------------------------------- FORUM ----------------------------------------*/
 
 .forum-box {
-	height:95vh;
+	height:92vh;
 	width:33%;
 	
 	border-radius:10px;
 	bordeR:2px solid black;
 	
-	margin:10px 10px 0px 10px;
+	margin:10px 10px 10px 10px;
 	overflow-Y:scroll;
+	overflow-X:hidden;
 }
 
 .forum-box>div {
 	border-radius:10px;
 	margin:5px;	
-	transition:background 0.15s ease
+	transition:background 0.15s ease;
+	width:100%;
+	height:fit-content:
 }
 
 .forum-box::-webkit-scrollbar {
@@ -124,6 +127,11 @@ header
 	background-color:#84A1AE;
 }
 
+.creator-link
+{
+	width:5em;
+}
+
 .discussion {
 	background-color:#99C9E5;
 }
@@ -166,7 +174,7 @@ header
 
 .topic-title {
 	font-size:1.5em;
-	margin-top:0px;
+	text-align:right;
 }
 
 .topic-infos {
@@ -175,8 +183,9 @@ header
 }
 
 .topic-infos span {
-	margin:auto;
+	align-self:flex-end;
 	text-decoration:underline;
+	margin-top:-5em;
 }
 
 .stat-value b{
@@ -190,6 +199,7 @@ header
 
 
 .created-zone b {
+	width:fit-content;
 	text-align:center;
 	margin:auto;
 }
@@ -290,6 +300,7 @@ header
 .like-zone
 {
 	width:4em;
+	min-height:3em;
 }
 
 .like-zone div
@@ -297,8 +308,24 @@ header
 	margin:3px;
 }
 
+.like-zone div a img
+{
+	align-self:flex-start;
+}
+
 .like-zone div p
 {
 	margin-top:0px;
 	text-align:center;
+}
+
+.discussion-infos
+{
+	max-width:7em;
+}
+
+.discussion-title
+{
+	width:80%;
+	margin-left:1em;
 }
