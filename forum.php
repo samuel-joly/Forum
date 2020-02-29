@@ -12,6 +12,15 @@
 			
 			$stmt = new PDO("mysql:host=localhost;dbname=forum","root","");
 			
+			if(isset($_POST["submitTopic"])) {
+				if(!empty($_POST["topicTitle"])){
+					$titre = htmlspecialchars($_POST["topicTitle"]);
+					$image = check_image($_FILES["topic_img"], $titre);
+					sql_request("INSERT INTO topics(`id`, `titre`, `id_createur`, `date_time`, `visibilite`, `image`)
+					VALUES (NULL,'".$titre."', '".$_SESSION["id"]."', CURRENT_TIMESTAMP, ".$_POST["visibility"].", '".$image."')");
+				}
+			}
+			
 			if(isset($_POST["submitDisc"])) {
 				if(!empty($_POST["discTitle"])){
 					$titre = escapeshellarg(htmlspecialchars($_POST["discTitle"]));
@@ -80,6 +89,28 @@
 				foreach($topics as $topic) {
 					echo create_forum($topic[0],$topic[1],$topic[2],$topic[4], "topic",$topic[3]);
 				}
+				
+				if(isset($_SESSION["id"]))
+				{
+					$droit = $stmt->query("SELECT nom FROM droits WHERE id = (SELECT id_droits FROM utilisateurs WHERE id =".$_SESSION["id"].")")->fetch()[0];
+					if($droit == "administrateur"  || $droit == "moderateur")
+					{ ?>
+						<form action="forum.php" method="post" class="topic-form flexc" enctype="multipart/form-data">
+							<span class="flex just-between">
+								<input type="text" name="topicTitle"/>
+								<label for="visibility">Visibilité</label>
+								<select name="visibility">
+									<option value="1">User</option>
+									<option value="2">Moderateur</option>
+									<option value="3">Administrateur</option>
+								</select>
+							</span>
+							<input type="file" name="topic_img"/>
+							<input type="submit" name="submitTopic" value="Envoyer"/>
+						</form>
+			<?php 	}
+				}
+				
 				echo "</div>";
 				
 				

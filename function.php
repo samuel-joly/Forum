@@ -182,5 +182,21 @@
 		
 		return $returned;
 	}
+	
+	function check_image($image, $name)
+	{
+		$type = strtolower(pathinfo($image["name"], PATHINFO_EXTENSION));
+		$path = "topicImages/".basename($image["name"]);
+		$newName = "topicImages/".$name.".".$type;
+		
+		if(file_exists($newName))
+		{
+			unlink($newName);
+			$newName = "topicImages/".$name.".".$type;
+		}
+		
+		move_uploaded_file($image["tmp_name"], $newName);
+		return($newName);
+	}
 
 ?>
