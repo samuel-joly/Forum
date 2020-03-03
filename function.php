@@ -51,8 +51,7 @@
 				SELECT (SELECT topics.image FROM topics WHERE topics.id = '".$topic_id."') AS 'profilPic' ,
 				(SELECT COUNT(*) FROM discussions WHERE discussions.id_topic= '".$topic_id."') AS 'countDisc' ,
 				(SELECT COUNT(*) FROM messages INNER JOIN discussions ON messages.id_discussion = discussions.id 
-					INNER JOIN topics ON discussions.id_topic = topics.id WHERE topics.id = '".$topic_id."') as 'countMsg'"
-			,true,true);
+					INNER JOIN topics ON discussions.id_topic = topics.id WHERE topics.id = '".$topic_id."') as 'countMsg'",true,true);
 			
 			$usrInfos = sql_request("SELECT messages.id_createur FROM messages
 			INNER JOIN discussions ON messages.id_discussion = discussions.id 
@@ -196,6 +195,7 @@
 		}
 		
 		move_uploaded_file($image["tmp_name"], $newName);
+		echo $newName;
 		return($newName);
 	}
 

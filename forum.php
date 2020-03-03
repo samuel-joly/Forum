@@ -17,8 +17,9 @@
 					$titre = htmlspecialchars($_POST["topicTitle"]);
 					$image = check_image($_FILES["topic_img"], $titre);
 					sql_request("INSERT INTO topics(`id`, `titre`, `id_createur`, `date_time`, `visibilite`, `image`)
-					VALUES (NULL,'".$titre."', '".$_SESSION["id"]."', CURRENT_TIMESTAMP, ".$_POST["visibility"].", '".$image."')");
+					VALUES (NULL,'".$titre."', '".$_SESSION["id"]."', NOW(), ".$_POST["visibility"].", '".$image."')");
 				}
+				header("location:forum.php");
 			}
 			
 			if(isset($_POST["submitDisc"])) {
@@ -79,10 +80,21 @@
 		<main>
 		
 			<?php
-
-				$topics = sql_request("SELECT titre, utilisateurs.pseudo, DATE_FORMAT(date_time,'%e %M %Y'), visibilite, topics.id 
-				FROM topics INNER JOIN utilisateurs ON topics.id_createur = utilisateurs.id 
-				ORDER BY date_time DESC", true);
+				
+				if(isset($_SESSION["id"]))
+				{
+					$topics = sql_request("SELECT titre, utilisateurs.pseudo, DATE_FORMAT(date_time,'%e %M %Y'), visibilite, topics.id 
+					FROM topics INNER JOIN utilisateurs ON topics.id_createur = utilisateurs.id 
+					WHERE visibilite <= (SELECT id_droits FROM utilisateurs WHERE id = ".$_SESSION["id"].")
+					ORDER BY date_time DESC", true);					
+				}
+				else
+				{
+					$topics = sql_request("SELECT titre, utilisateurs.pseudo, DATE_FORMAT(date_time,'%e %M %Y'), visibilite, topics.id 
+					FROM topics INNER JOIN utilisateurs ON topics.id_createur = utilisateurs.id 
+					WHERE visibilite <= 1
+					ORDER BY date_time DESC", true);	
+				}
 				
 				
 				echo "<div class='flexc forum-box' id='topic-box'>";
@@ -95,14 +107,20 @@
 					$droit = $stmt->query("SELECT nom FROM droits WHERE id = (SELECT id_droits FROM utilisateurs WHERE id =".$_SESSION["id"].")")->fetch()[0];
 					if($droit == "administrateur"  || $droit == "moderateur")
 					{ ?>
-						<form action="forum.php" method="post" class="topic-form flexc" enctype="multipart/form-data">
+						<form action="" method="post" class="topic-form flexc" enctype="multipart/form-data">
 							<span class="flex just-between">
 								<input type="text" name="topicTitle"/>
 								<label for="visibility">Visibilité</label>
 								<select name="visibility">
-									<option value="1">User</option>
-									<option value="2">Moderateur</option>
-									<option value="3">Administrateur</option>
+									<?php
+										$droits = $stmt->query("SELECT id, nom FROM droits")->fetchAll();
+										foreach($droits as $infos)
+										{?>
+											<option value='<?= $infos[0] ?>'><?= $infos[1] ?></option>
+								<?php }
+									
+										
+									?>
 								</select>
 							</span>
 							<input type="file" name="topic_img"/>
@@ -117,9 +135,22 @@
 				if(isset($_GET["topic"])) {
 					
 					echo "<div class='flexc forum-box' id='discussion-box'>";
-					$discussions = sql_request("SELECT titre, utilisateurs.pseudo, DATE_FORMAT(date_time,'%e %M %Y %H:%i'), discussions.id
-					FROM discussions INNER JOIN utilisateurs ON discussions.id_createur = utilisateurs.id
-					WHERE id_topic = ".$_GET["topic"]." ORDER BY date_time ASC", true);
+				
+					if(isset($_SESSION["id"]))
+					{
+						$discussions = sql_request("SELECT titre, utilisateurs.pseudo, DATE_FORMAT(date_time,'%e %M %Y %H:%i'), discussions.id
+						FROM discussions INNER JOIN utilisateurs ON discussions.id_createur = utilisateurs.id
+						WHERE id_topic = ".$_GET["topic"]." AND  (SELECT id_droits FROM utilisateurs WHERE id = ".$_SESSION["id"].")
+						>= (SELECT visibilite FROM topics WHERE id=".$_GET["topic"].")
+						ORDER BY date_time ASC", true);												
+					}
+					else
+					{
+						$discussions = sql_request("SELECT titre, utilisateurs.pseudo, DATE_FORMAT(date_time,'%e %M %Y %H:%i'), discussions.id
+						FROM discussions INNER JOIN utilisateurs ON discussions.id_createur = utilisateurs.id
+						WHERE id_topic = ".$_GET["topic"]." AND  1 >= (SELECT visibilite FROM topics WHERE id=".$_GET["topic"].")
+						ORDER BY date_time ASC", true);
+					}
 					
 					
 					foreach($discussions as $discussion) {
