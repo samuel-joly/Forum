@@ -19,10 +19,10 @@
   </header>
 
 <?php
-
+/////////////////////////////////////////////////////////////////////////variable session/////////////////////////////////////////
  $connexion=mysqli_connect("localhost","root","","forum");
 $log=$_SESSION['login'];
-$id=$_SESSION['id'];
+$id=$_SESSION['id'];////////////////////////////////////////securité verifie la session//////////////////////////////////////////////
     if(!isset($_SESSION['login']))
     {
       header("location: connexion.php");
@@ -32,7 +32,7 @@ $id=$_SESSION['id'];
 
 
 
-               //si on clique sur la deconnexion
+/////////////////////////////////////////si on clique sur la deconnexion////////////////////////////////////////////////////////////
     if (!empty($_POST['deconection'])) 
     {    
     unset ( $_SESSION ['id'] );
@@ -109,7 +109,7 @@ if ($id_droits_a == 3  OR $_SESSION['id'] == $_GET['id'])
 
 <main>
   <section class="oc-section-profil">
-<?php
+<?php /////////////////////////////connexion bdd//////////////////////////////////////////////////////////////////
    $connexion=mysqli_connect("localhost","root","","forum");
 
 
@@ -196,7 +196,7 @@ if ($id_droits_a == 3  OR $_SESSION['id'] == $_GET['id'])
   {
     echo "tous les champs doivent etre complétés !";
   }
-  //enregistrement de limage
+  //////////////////////////////////enregistrement de limage
                                if (isset($_FILES['image']))
                                 { 
                                  
@@ -267,7 +267,7 @@ $requet_admin_a = "SELECT id_droits FROM utilisateurs where id = '$id' ";
     {
       # code...
     
-echo "string";
+
 
   $requet_admin = "SELECT id_droits FROM utilisateurs where id = '$idvisiter' ";
   $connexion_requet_admin = mysqli_query($connexion,$requet_admin);
@@ -357,10 +357,13 @@ echo "string";
       <input class="oc-supression-user" type="submit" name="bouton-suprime-user" value="suprimé l'utilisateur">
     </form> 
      </section>
-  <?php
+  <?php ///////////////////////////////////////////////////supression user par l'admin///////////////////////////////////////////////////////:
       if (isset($_POST['bouton-suprime-user'])) 
       {
-        
+        $connexion=mysqli_connect("localhost","root","","forum");
+        $requette_suprime_user = "DELETE  FROM utilisateurs WHERE id ='$idvisiter' ";
+        $connexion_requette_suprime_user = mysqli_query($connexion,$requette_suprime_user);
+        header("location: forum.php");
       }
   }
 }
