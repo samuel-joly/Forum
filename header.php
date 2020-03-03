@@ -10,12 +10,12 @@
 
 ?>
 
-
+<link rel="stylesheet" type="text/css" href="css/oliv-header.css">
 
 <header class="flex just-between head-foot">
 	<?php  if(!isset($_SESSION["id"])) { ?>
-		<a href="connexion.php">Connexion</a>
-		<a href="inscription.php">Inscription</a>
+		<a class="oc-color-blue" href="connexion.php">Connexion</a>
+		<a class="oc-color-white" href="inscription.php">Inscription</a>
 	<?php } 
 	else {
 		///////////////////////////////////////verif l'identité pour modifier le profil////////////////////////////////////////
@@ -28,20 +28,13 @@
 		  $id_user_profil = $result_id['id'];
 		?>
 
-		<a href="<?php echo "profil.php?id=".$id_user_profil." "?> ">profil</a>
-		<a href="profil.php?deco=true">Deconnexion</a>
+		<a class="oc-color-blue" href="<?php echo "profil.php?id=".$id_user_profil." "?> ">profil</a>
+		<a class="oc-color-white" href="profil.php?deco=true">Deconnexion</a>
 	<?php } 
 ////////////////////////////////////////////////////////fin de liens vers le profil////////////////////////////////////////////
 	?>
 		
-	<a href="forum.php">Forums</a>
+	<a class="oc-color-red" href="forum.php">Forums</a>
 	
-	<?php if(!empty($_SESSION["login"]) ) 
-	{
-	  if ($_SESSION["login"] == "admin" ) 
-	   { ?>
-   
-		<a href="admin.php">Admin</a>
-<?php  }
-	}	   ?>
+
 </header>

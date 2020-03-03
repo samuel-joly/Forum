@@ -3,6 +3,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+		<link rel="stylesheet" type="text/css" href="css/oliv_connexion.css"/>
 		<title>Connexion</title>
 	</head>
 
@@ -33,16 +34,30 @@
 			}	
 		?>
 
-		<main>
-			<form action="connexion.php" method="post">
+		<main class="oc-main-connexion-forum">
+			<h1 class="oc-titre-connexion-forum">Le FAUX rhum !</h1>
+			<h2 class="oc-titre-connexion-forum"> connectez vous !<h2>
+			<form  action="connexion.php" method="post">
+				<table class="oc-table-connexion-forum">
+					<tbody>
+						<tr><td>		
 				<label for="pseudo">Pseudo</label>
+			</td><td>
 				<input type="text" name="pseudo" placeholder="Alan Smithee" required/>
-
+             			</td></tr>
+             			<tr><td>
 				<label for="psw">Password</label>
+			</td><td>
 				<input type="password" name="psw" required/>
-
+				        </td></tr>
+				        <tr><td>
 				<input type="submit" name="submit"/>
+			    </td>
+				</tr><tr><td>
 				<input type="reset" value="Effacer"/>
+			</td></tr>
+				 </tbody>
+				</table>
 			</form>
 		</main>
 

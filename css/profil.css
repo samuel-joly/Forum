@@ -19,6 +19,7 @@
 }
 .oc-tablinscri
 {
+    width: 110%;
     margin: auto;
     background-color: #091114a1;
     padding: 3%;
@@ -51,6 +52,7 @@
 }
 .oc-tablinscri
  {
+
     -webkit-animation-name: fadeInDown;
     animation-name: fadeInDown;
     -webkit-animation-duration: 1s;

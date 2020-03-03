@@ -357,7 +357,7 @@ $requet_admin_a = "SELECT id_droits FROM utilisateurs where id = '$id' ";
       <input class="oc-supression-user" type="submit" name="bouton-suprime-user" value="suprimé l'utilisateur">
     </form> 
      </section>
-  <?php ///////////////////////////////////////////////////supression user par l'admin///////////////////////////////////////////////////////:
+  <?php ///////////////////////////////////////////////////supression user par l'admin///////////////////////////////////////////////////////
       if (isset($_POST['bouton-suprime-user'])) 
       {
         $connexion=mysqli_connect("localhost","root","","forum");
@@ -372,7 +372,7 @@ $requet_admin_a = "SELECT id_droits FROM utilisateurs where id = '$id' ";
 
 
 </main>
-  <!--FOOTER-->
-
+  <!--//////////////////////////////////////////////////FOOTER///////////////////////////////////////////////////////////////////////-->
+ <?php include('footer.php'); ?>
 </body>
 </html>
