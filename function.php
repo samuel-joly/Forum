@@ -7,7 +7,7 @@
 				break;
 			}
 		}
-		return true;
+		return   true;
 	}
 	
 	function sql_request($request, bool $isData=false, bool $isSingle=false) {
@@ -59,21 +59,26 @@
 			WHERE discussions.id_topic = '".$topic_id."'
 			GROUP BY messages.id_createur",true);
 			
+			$creator_id = sql_request("SELECT id_createur FROM topics WHERE  id='".$topic_id."'",true,true)[0];
 			return "<div class='flexc topic just-around ".currTopic($topic_id)."'>
-						<a class='a-null flex just-betw' href='forum.php?topic=".$topic_id."'>	
+						<a class='a-null flex just-betw big-link' href='forum.php?topic=".$topic_id."'>	
 						
-							<div class='created-zone flexc'>
+							<div class='created-zone flex'>
 								<div class='topicPic' style='background-image:url(\"".$infos[0]."\"');'></div>
-								<i class='date'>".$date."</i>
-								<b>".$creator."</b>
-							</div>
-							<div class='flexc topic-infos'>
-								<span class='flex just-betw'> <p class='topic-title'>".$title."</p> </span>
-								<div class='flex just-around'>
-									<p class='stat-value flexc'><b>".$infos[1]."</b>Discussions</p>
-									<p class='stat-value flexc'><b>".$infos[2]."</b>Messages</p>
-									<p class='stat-value flexc'><b>".count($usrInfos)."</b>Utilisateurs</p>
+								<div class='flexc center'>
+									<i class='date'>".$date."</i>
+									<b><a href='profil.php?id=".$creator_id."'>".$creator."</a></b>
 								</div>
+							</div>
+							<div >
+								<a class='a-null flexc topic-infos' href='forum.php?topic=".$topic_id."'>	
+									<span class='flex just-betw'> <p class='topic-title'>".$title."</p> </span>
+									<div class='flex just-around'>
+										<p class='stat-value flexc'><b>".$infos[1]."</b>Discussions</p>
+										<p class='stat-value flexc'><b>".$infos[2]."</b>Messages</p>
+										<p class='stat-value flexc'><b>".count($usrInfos)."</b>Utilisateurs</p>
+									</div>
+								</a>
 							</div>
 						</a>
 				  </div>";
@@ -85,32 +90,98 @@
 			INNER JOIN topics ON discussions.id_topic = topics.id
 			WHERE discussions.id =".$topic_id, true, true);
 			
+			
 			$profilPic = sql_request("SELECT utilisateurs.profilPic FROM utilisateurs
 			INNER JOIN discussions ON utilisateurs.id = discussions.id_createur
 			WHERE discussions.id=".$topic_id,true,true);
+			$creator_id = sql_request("SELECT id_createur FROM discussions WHERE  id='".$topic_id."'",true,true)[0];
 			
-			return"<div class='flexc discussion ".currTopic($topic_id, true)."'>
-					<a class='a-null flex just-betw' href='forum.php?topic=".$_GET["topic"]."&&discussion=".$topic_id."'>	
+			return"<div class='flex discussion ".currTopic($topic_id, true)."'>
+					<a class=' a-null flex just-betw big-link' href='forum.php?topic=".$_GET["topic"]."&&discussion=".$topic_id."'>	
 						
-						<div class='flex just-center disc-profil'>
-							<img class='disc-profilPic' src='".$profilPic[0]."'/>
-							<p class='flexc disc-info-auteur'>
-								<u>".$creator."</u> 
+							<a class='flexc' href='forum.php?topic=".$_GET["topic"]."&&discussion=".$topic_id."'>								
+								<img class='disc-profilPic' src='".$profilPic[0]."'/>
+							</a>							
+							
+							<div class='flexc discussion-infos'>
+								<a href='profil.php?id=".$creator_id."'>".$creator."</a>
 								<i>".$date."</i>
-								<span class='disc-titre'>".$title."</span>
-							</p>
-						</div>
-						<div class='disc-stat flexc'><b>".$stat_message[0]."</b>Réponses</div>
+							</div>
+
+							
+							<a class='flex a-null just-between discussion-title' href='forum.php?topic=".$_GET["topic"]."&&discussion=".$topic_id."'>
+								<span class='disc-titre center'>".$title."</span>
+								<div class='disc-stat flexc'><b>".$stat_message[0]."</b>Réponses</div>
+							</a>
 					</a>
 				  </div>";
 		
 		}
 		if($type == "message") {
+			$creator_id = sql_request("SELECT id FROM utilisateurs WHERE pseudo ='".$creator."'",true,true)[0];
 			return "<div class='message'>
-						<p>Par <u>".$creator."</u> le ".$date."</p>
+						<p>Par <a href='profil.php?id=".$creator_id."' class='creator-link'><u>".$creator."</u></a> le ".$date."</p>
 						<h3>".$message."</h3>
+						".get_likes($topic_id)."
 				  </div>";
 		}
+	}
+	
+	function get_likes($id)
+	{
+		$likes = sql_request("SELECT COUNT(*) FROM likes WHERE id_message = ".$id,true,true)[0];
+		$dislikes = sql_request("SELECT COUNT(*) FROM dislikes WHERE id_message = ".$id,true,true)[0];
+		
+		$returned = "<div class='flex just-center like-zone'>";
+		if(isset($_SESSION["id"]))
+		{
+			if(!empty(sql_request("SELECT id_utilisateur FROM likes WHERE id_message =".$id." AND id_utilisateur = ".$_SESSION["id"],true,true)))
+			{ 
+				$returned .= "<div class='flex just-center'>";
+				$returned .= "<a href='forum.php?unlike=".$id."'><img src='Images/liked.png' class='thumb-btn'></a>";
+			}
+			else
+			{
+				$returned .= "<div class='flex just-center'>";
+				$returned .= "<a href='forum.php?like=".$id."'><img src='Images/like.png' class='thumb-btn'></a>";
+			}
+			if($likes != 0)
+			{
+				$returned .= "<p>".$likes."</p></div>";
+			}
+			else
+			{
+				$returned .= "</div>";
+			}
+			
+			if(!empty(sql_request("SELECT id_utilisateur FROM dislikes WHERE id_message =".$id." AND id_utilisateur = ".$_SESSION["id"],true,true)))
+			{ 
+				$returned .= "<div class='flex just-center center'>";
+				$returned .= "<a href='forum.php?undislike=".$id."'><img src='Images/disliked.png' class='thumb-btn'></a>";
+			}
+			else
+			{
+				$returned .= "<div class='flex just-center'>";
+				$returned .= "<a href='forum.php?dislike=".$id."'><img src='Images/dislike.png' class='thumb-btn'></a>";
+			}
+			if($dislikes != 0)
+			{
+				$returned .= "<p>".$dislikes."</p></div>";
+			}
+			else
+			{
+				$returned .= "</div>";
+			}
+		}
+		else
+		{ 
+			$returned .= "<a href='connexion.php'><img src='Images/like.png' class='thumb-btn'></a>";
+			$returned .= "<a href='connexion.php'><img src='Images/dislike.png' class='thumb-btn'></a>";	
+		}
+		
+		$returned .= "</div>";
+		
+		return $returned;
 	}
 
 ?>

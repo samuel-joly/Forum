@@ -25,6 +25,8 @@
                         <form class="oc-form" method="POST" action=""  >
 <?php
 
+                          
+
 
 if (!empty($_POST["submit"])) 
 {
@@ -43,19 +45,34 @@ if (!empty($_POST["submit"]))
                   $retour=mysqli_num_rows($req);
                  
                            if($retour==0)
-                           {         
-                                                  
+                           {       
+                             $zero = 1;
+                                 //insertion utilisateur                 
                             $help = "profilPics/profil.jpg";
-                            $requete="INSERT INTO utilisateurs (pseudo,profilPic,mdp)
-                            VALUES (\"$login\",\"$help\",\"$password\")";    
-                                       
+                            $requete="INSERT INTO utilisateurs (pseudo,profilPic,mdp,id_droits)
+                            VALUES (\"$login\",\"$help\",\"$password\",\"$zero\")";    
                             $inser= mysqli_query($connexion, $requete);
+
+
+                            /////selection de ID pour ID_utilisateur
+                           $requette_selectionid = "SELECT id FROM utilisateurs";
+                            $connexion_bdd_id = mysqli_query($connexion,$requette_selectionid);
+                            $compte_le_nombreid = mysqli_num_rows($connexion_bdd_id);
+                            $numero_dernier_inscrit = $compte_le_nombreid -1;
+                            $dernier_id = mysqli_fetch_all($connexion_bdd_id);   
+                            $nombreid = $dernier_id[$numero_dernier_inscrit][0];                    
+                       ///////////$dernier_id[$numero_dernier_inscrit][0]; l'id du drenier inscrit
+
+                           
+                            /////insertion administrateurs
+                            
+                           $inseradmin = "INSERT INTO administrateurs (id_utilisateur,admin,moderateur)
+                            VALUES (\"$nombreid\",\"$zero\",\"$zero\")";
+                            $insertion_admin = mysqli_query($connexion,$inseradmin);
+                            
                         
                              header("location: connexion.php");
                           
-                            
-                            
-
                           } 
                           else
                           {
@@ -74,6 +91,7 @@ if (!empty($_POST["submit"]))
 
 }
 
+ 
 
 ?> 
 

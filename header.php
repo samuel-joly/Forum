@@ -1,43 +1,47 @@
 <?php 
 	session_start();
 	include("function.php");
+	
+	if(isset($_GET["deco"]))
+	{
+		session_destroy();
+		header("location: connexion.php");
+	}
 
 ?>
 
 
 
-<header>
+<header class="flex just-between head-foot">
 	<?php  if(!isset($_SESSION["id"])) { ?>
 		<a href="connexion.php">Connexion</a>
 		<a href="inscription.php">Inscription</a>
-	<?php } ?>
+	<?php } 
+	else {
+		///////////////////////////////////////verif l'identité pour modifier le profil////////////////////////////////////////
+		$connexion=mysqli_connect("localhost","root","","forum");
+		$id_user = $_SESSION['id'];
+		  $requette_id = "SELECT id FROM utilisateurs where id = $id_user ";
+		  $requette_id_connexion = mysqli_query($connexion,$requette_id);
+		  $result_id = mysqli_fetch_assoc($requette_id_connexion);
+		  
+		  $id_user_profil = $result_id['id'];
+		?>
 
-	<?php if (isset($_SESSION["id"])) {?>
-		<a href="profil.php">profil</a>
-	<?php } ?>
+		<a href="<?php echo "profil.php?id=".$id_user_profil." "?> ">profil</a>
+		<a href="profil.php?deco=true">Deconnexion</a>
+	<?php } 
+////////////////////////////////////////////////////////fin de liens vers le profil////////////////////////////////////////////
+	?>
 		
 	<a href="forum.php">Forums</a>
 	
 	<?php if(!empty($_SESSION["login"]) ) 
 	{
-              if ($_SESSION["login"] == "admin" ) 
-               {
-              			# code...
-              				?>
+	  if ($_SESSION["login"] == "admin" ) 
+	   { ?>
+   
 		<a href="admin.php">Admin</a>
-<?php } 
-              }?>
-	<?php if (isset($_POST["oc-deco"])) { 
-		session_destroy();
-	}
-	
-	?>
-		
-
-	
-
-	<form method="POST" action="">
-	<label for="oc-deco"></label>
-	<input type="submit" name="oc-deco" value="deconnection">
-	</form>
+<?php  }
+	}	   ?>
 </header>

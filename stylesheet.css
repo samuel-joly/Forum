@@ -1,5 +1,7 @@
 body {
-	background:#73CFC9
+	background:#73CFC9;
+	margin:0;
+	padding:0;
 }
 
 
@@ -20,7 +22,7 @@ main {
 	align-self:center;
 }
 
-.just-betw {
+.just-between {
 	justify-content:space-between;
 }
 
@@ -28,27 +30,50 @@ main {
 	justify-content:space-around;
 }
 
+.just-center
+{
+	justify-content:center;
+}
+
 .a-null {
 	text-decoration:none;
 	color:black;
 }
+
+/*---------------------------------------- HEADER ----------------------------------------*/
+
+header
+{
+	
+}
+
+.head-foot
+{
+	padding:1em 1em 1em 1em;
+	background:#e4e4e4;
+	height:1.2em;
+}
+
 /*---------------------------------------- FORUM ----------------------------------------*/
 
 .forum-box {
-	height:95vh;
+	height:92vh;
 	width:33%;
 	
 	border-radius:10px;
 	bordeR:2px solid black;
 	
-	margin:10px 10px 0px 10px;
+	margin:10px 10px 10px 10px;
 	overflow-Y:scroll;
+	overflow-X:hidden;
 }
 
 .forum-box>div {
 	border-radius:10px;
-	margin:5px;
-	transition:background 0.15s ease
+	margin:5px;	
+	transition:background 0.15s ease;
+	width:100%;
+	height:fit-content:
 }
 
 .forum-box::-webkit-scrollbar {
@@ -102,6 +127,11 @@ main {
 	background-color:#84A1AE;
 }
 
+.creator-link
+{
+	width:5em;
+}
+
 .discussion {
 	background-color:#99C9E5;
 }
@@ -111,8 +141,10 @@ main {
 }
 
 .message {
-	min-height:75px;
 	background-color:#AEB5E9;
+	max-width:100%;
+	height:fit-content;
+	word-wrap:break-word;
 }
 
 .message:hover {
@@ -142,7 +174,7 @@ main {
 
 .topic-title {
 	font-size:1.5em;
-	margin-top:0px;
+	text-align:right;
 }
 
 .topic-infos {
@@ -151,8 +183,9 @@ main {
 }
 
 .topic-infos span {
-	margin:auto;
+	align-self:flex-end;
 	text-decoration:underline;
+	margin-top:-5em;
 }
 
 .stat-value b{
@@ -166,6 +199,7 @@ main {
 
 
 .created-zone b {
+	width:fit-content;
 	text-align:center;
 	margin:auto;
 }
@@ -210,8 +244,13 @@ main {
 	font-size:1.2em;
 }
 
+.disc-form
+{
+	display:flex;
+	
+}
 
-#disc-form input[type="text"]{
+.disc-form input[type="text"]{
 	width:80%;
 	height:20px;
 	font-size:1.2em;
@@ -220,7 +259,7 @@ main {
 	margin:10px;
 }
 
-#disc-form input[type="submit"] {
+.disc-form input[type="submit"] {
 	background-color:#78C0E0;
 	border-radius:5px;
 	border:0px;
@@ -228,13 +267,15 @@ main {
 	margin-top:1px;
 	cursor:pointer;
 	transition:background 0.15s ease;
+	height:2em;
+	align-self:center;
 }
 
-#disc-form input[type="submit"]:hover {
+.disc-form input[type="submit"]:hover {
 	background:#7093A7;
 }
 
-#disc-form textarea{
+.disc-form textarea{
 	min-width:80%;
 	min-height:40px;
 	max-width:80%;
@@ -244,7 +285,47 @@ main {
 	border:0px;
 }
 
-.msg-submit {
-	position:relative;
-	bottom:25px;
+.thumb-btn
+{
+	height:20px;
+	transition:all 0.3s ease;
+	margin-top:-3px;
+}
+
+.thumb-btn:hover
+{
+	transform:rotate(20deg);
+}
+
+.like-zone
+{
+	width:4em;
+	min-height:3em;
+}
+
+.like-zone div
+{
+	margin:3px;
+}
+
+.like-zone div a img
+{
+	align-self:flex-start;
+}
+
+.like-zone div p
+{
+	margin-top:0px;
+	text-align:center;
+}
+
+.discussion-infos
+{
+	max-width:7em;
+}
+
+.discussion-title
+{
+	width:80%;
+	margin-left:1em;
 }
