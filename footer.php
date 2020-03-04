@@ -9,7 +9,7 @@
 
 <link rel="stylesheet" type="text/css" href="css/oliv-footer.css">
 
-<footer class="flex just-between head-foot">
+<footer class="flex  head-foot">
 	<?php  if(!isset($_SESSION["id"])) { ?>
 		<a class="oc-color-blue" href="connexion.php">Connexion</a>
 		<a class="oc-color-white" href="inscription.php">Inscription</a>

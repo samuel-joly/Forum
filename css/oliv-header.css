@@ -1,4 +1,11 @@
-
+header
+{
+	display: flex;
+	justify-content: space-around;
+    background: #e4e4e4;
+    height: 10%;
+    width: 100%;
+}
 a
 {
 	text-decoration: none;
