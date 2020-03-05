@@ -11,7 +11,7 @@
 	<body>
 		
 		<?php include("header.php");
-<<<<<<< HEAD
+
 			
 			$stmt = new PDO("mysql:host=localhost;dbname=forum","root","");
 			
@@ -23,21 +23,6 @@
 					VALUES (NULL,'".$titre."', '".$_SESSION["id"]."', NOW(), ".$_POST["visibility"].", '".$image."')");
 				}
 				header("location:forum.php");
-			}
-			
-=======
-				
-
-			$stmt = new PDO("mysql:host=localhost;dbname=forum","root","");
-			
->>>>>>> 3f12b389923666ea6e8baeb492bbb4ef92ee9d4e
-			if(isset($_POST["submitDisc"])) {
-				if(!empty($_POST["discTitle"])){
-					$titre = escapeshellarg(htmlspecialchars($_POST["discTitle"]));
-					sql_request("INSERT INTO discussions(`id`, `titre`, `id_topic`, `id_createur`, `date_time`)
-					VALUES (NULL, $titre, '".$_GET["topic"]."', '".$_SESSION["id"]."', CURRENT_TIMESTAMP)");
-				}
-				header("location:forum.php?topic=".$_GET["topic"]);
 			}
 
 			if(isset($_POST["submitMsg"])) {
