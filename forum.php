@@ -14,7 +14,37 @@
 
 			
 			$stmt = new PDO("mysql:host=localhost;dbname=forum","root","");
+			if(isset($_GET["delete_topic"]))
+			{
+				unlink($stmt->query("SELECT image FROM topics WHERE id=".$_GET["delete_topic"])->fetch()[0]);
+				$stmt->query("DELETE FROM topics WHERE id =".$_GET["delete_topic"]);
+				foreach($stmt->query("SELECT id FROM discussions WHERE id_topic =".$_GET["delete_topic"])->fetchAll() as $related_disc)
+				{
+					$stmt->query("DELETE FROM discussions WHERE id =".$related_disc[0]);
+					
+					foreach($stmt->query("SELECT id FROM messages WHERE id_discussion =".$related_disc[0])->fetchAll() as $related_msg)
+					{
+						$stmt->query("DELETE FROM messages WHERE id =".$related_msg[0]);
+					}
+				}
+				header("location:forum.php");
+			}
 			
+			if(isset($_GET["delete_discussion"]))
+			{
+				$stmt->query("DELETE FROM discussion WHERE id =".$_GET["delete_discussion"]);
+				foreach($stmt->query("SELECT id FROM messages WHERE id_discussion =".$_GET["delete_discussion"])->fetchAll() as $related_msg)
+				{
+					$stmt->query("DELETE FROM messages WHERE id =".$related_msg);
+				}
+				header("location:forum.php");
+			}
+			
+			if(isset($_GET["delete_message"]))
+			{
+				$stmt->query("DELETE FROM messages WHERE id =".$_GET["delete_message"]);
+				header("location:forum.php");
+			}
 			if(isset($_POST["submitTopic"])) {
 				if(!empty($_POST["topicTitle"])){
 					$titre = htmlspecialchars($_POST["topicTitle"]);
@@ -23,6 +53,15 @@
 					VALUES (NULL,'".$titre."', '".$_SESSION["id"]."', NOW(), ".$_POST["visibility"].", '".$image."')");
 				}
 				header("location:forum.php");
+			}
+			
+			if(isset($_POST["submitDisc"])) {
+				if(!empty($_POST["discTitle"])) {
+					$titre= htmlspecialchars($_POST["discTitle"]); 
+					sql_request("INSERT INTO `discussions`(`id`, `titre`, `id_topic`, `id_createur`, `date_time`) 
+					VALUES (NULL,'".$titre."', '".$_GET["topic"]."', ".$_SESSION["id"]." , CURRENT_TIMESTAMP)");
+				}
+				header("location:forum.php?topic=".$_GET["topic"]);
 			}
 
 			if(isset($_POST["submitMsg"])) {

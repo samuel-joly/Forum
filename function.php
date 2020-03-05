@@ -43,6 +43,29 @@
 			}			
 		}
 	}
+	
+	function can_delete($id, $deleted_id, $type)
+	{	
+		if(sql_request("SELECT id_droits FROM utilisateurs WHERE id = ".$_SESSION["id"], true, true)[0] == 3)
+		{
+			if($type == 0)
+			{
+				return "<a href='forum.php?delete_topic=".$deleted_id."' class='delete' ><img src='Images/delete.png' /></a>";				
+			}
+			else if ($type == 1)
+			{
+				return "<a href='forum.php?delete_discussion=".$deleted_id."' class='delete'><img src='Images/delete.png'  /></a>";				
+			}
+			else if ($type == 2)
+			{
+				return "<a href='forum.php?delete_message=".$deleted_id."' class='delete'><img src='Images/delete.png'  /></a>";				
+			}
+		}
+		else
+		{
+			return "";
+		}
+	}
 
 	function create_forum($title, $creator, $date , $topic_id, $type, $access = 1, $message="") {
 		if($type == "topic") {
@@ -58,16 +81,25 @@
 			WHERE discussions.id_topic = '".$topic_id."'
 			GROUP BY messages.id_createur",true);
 			
+			if(isset($_SESSION["id"]))
+			{
+				$delete_topic = can_delete($_SESSION["id"], $topic_id,0);				
+			}
+			else
+			{
+				$delete_topic = "";
+			}
 			$creator_id = sql_request("SELECT id_createur FROM topics WHERE  id='".$topic_id."'",true,true)[0];
 			return "<div class='flexc topic just-around ".currTopic($topic_id)."'>
 						<a class='a-null flex just-betw big-link' href='forum.php?topic=".$topic_id."'>	
-						
+							
 							<div class='created-zone flex'>
 								<div class='topicPic' style='background-image:url(\"".$infos[0]."\"');'></div>
 								<div class='flexc center'>
 									<i class='date'>".$date."</i>
 									<b><a href='profil.php?id=".$creator_id."'>".$creator."</a></b>
 								</div>
+								".$delete_topic."
 							</div>
 							<div >
 								<a class='a-null flexc topic-infos' href='forum.php?topic=".$topic_id."'>	
@@ -80,6 +112,7 @@
 								</a>
 							</div>
 						</a>
+						
 				  </div>";
 		}
 		if($type == "discussion") {
@@ -94,6 +127,15 @@
 			INNER JOIN discussions ON utilisateurs.id = discussions.id_createur
 			WHERE discussions.id=".$topic_id,true,true);
 			$creator_id = sql_request("SELECT id_createur FROM discussions WHERE  id='".$topic_id."'",true,true)[0];
+			
+			if(isset($_SESSION["id"]))
+			{
+				$delete_discussion= can_delete($_SESSION["id"], $topic_id,1);				
+			}
+			else
+			{
+				$delete_discussion = "";
+			}
 			
 			return"<div class='flex discussion ".currTopic($topic_id, true)."'>
 					<a class=' a-null flex just-betw big-link' href='forum.php?topic=".$_GET["topic"]."&&discussion=".$topic_id."'>	
@@ -112,15 +154,27 @@
 								<div class='disc-stat flexc'><b>".$stat_message[0]."</b>Réponses</div>
 							</a>
 					</a>
+					
+					".$delete_discussion."
+					
 				  </div>";
 		
 		}
 		if($type == "message") {
 			$creator_id = sql_request("SELECT id FROM utilisateurs WHERE pseudo ='".$creator."'",true,true)[0];
+			if(isset($_SESSION["id"]))
+			{
+				$delete_msg= can_delete($_SESSION["id"], $topic_id,2);				
+			}
+			else
+			{
+				$delete_msg = "";
+			}
 			return "<div class='message'>
-						<p>Par <a href='profil.php?id=".$creator_id."' class='creator-link'><u>".$creator."</u></a> le ".$date."</p>
+						<p>Par <a href='profil.php?id=".$creator_id."' class='creator-link'><u>".$creator."</u></a> le ".$date." ".$delete_msg."</p>
 						<h3>".$message."</h3>
 						".get_likes($topic_id)."
+						
 				  </div>";
 		}
 	}

@@ -18,6 +18,20 @@ main
 {
   margin: auto;
 }
+
+.oc-main-inscription-forum
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.oc-body-incription
+{
+	text-align: center;
+	width: 100%;
+}
+
+
 .section-deventure
 {
 	    text-align: center;

@@ -19,15 +19,7 @@
 
 		<a class="oc-color-blue" href="profil.php">profil</a>
 		<a class="oc-color-white" href="profil.php?deco=true">Deconnexion</a>
-	<?php } 
-
-	if(!empty($_SESSION["login"]) ) 
-	{
-	  if ($_SESSION["login"] == "admin" ) 
-	   { ?>   
-		<a href="admin.php">Admin</a>
-<?php  }
-	}	?>
+	<?php } ?>
 		
 	<a class="oc-color-red" href="forum.php">Forums</a>
 	
