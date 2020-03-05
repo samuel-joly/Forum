@@ -106,6 +106,10 @@
 								<a href='profil.php?id=".$creator_id."'>".$creator."</a>
 								<i>".$date."</i>
 							</div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3f12b389923666ea6e8baeb492bbb4ef92ee9d4e
 							
 							<a class='flex a-null just-between discussion-title' href='forum.php?topic=".$_GET["topic"]."&&discussion=".$topic_id."'>
 								<span class='disc-titre center'>".$title."</span>
@@ -181,6 +185,7 @@
 		
 		return $returned;
 	}
+<<<<<<< HEAD
 	
 	function check_image($image, $name)
 	{
@@ -198,5 +203,7 @@
 		echo $newName;
 		return($newName);
 	}
+=======
+>>>>>>> 3f12b389923666ea6e8baeb492bbb4ef92ee9d4e
 
 ?>

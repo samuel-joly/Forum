@@ -1,3 +1,11 @@
+
+main
+{
+}
+.oc-supression-user
+{
+  color: red;
+}
 .oc-img-profil
 {
 	border: solid #07829ade 3PX;
@@ -5,6 +13,10 @@
     height: 26%;
     border-radius: 100%;
     box-shadow: #0039a2 5px 5px 11PX;
+}
+.oc-section-profil
+{
+  margin: auto;
 }
 .section-deventure
 {
@@ -15,6 +27,7 @@
 }
 .oc-tablinscri
 {
+    width: 110%;
     margin: auto;
     background-color: #091114a1;
     padding: 3%;
@@ -25,7 +38,7 @@
 }
 .buton-inscription
 {
-    width: 14%;
+    width: 35%;
     border: none;
     padding: 6px 0 6px 0;
     border-radius: 8px;
@@ -33,6 +46,10 @@
     font: bold 13px Arial;
     color: #fff;
     box-shadow: 2px 2px black;
+}
+.oc-zindex-profil
+{
+
 }
 .oc-titreh
 {
@@ -43,6 +60,7 @@
 }
 .oc-tablinscri
  {
+
     -webkit-animation-name: fadeInDown;
     animation-name: fadeInDown;
     -webkit-animation-duration: 1s;
@@ -81,4 +99,12 @@
   @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
   @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
+}
+.oc-zindex-profil-definir-admin
+{
+  background-color: #df0e0e;
+ height: 28px;
+    border: solid 2px #3F51B5;
+    box-shadow: 2px 2px 4px #1c568f;
+    color: white;
 }

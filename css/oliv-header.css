@@ -1,0 +1,30 @@
+header
+{
+	display: flex;
+	justify-content: space-around;
+    background: #e4e4e4;
+   padding: 1%;
+    width: 100%;
+}
+a
+{
+	text-decoration: none;
+}
+.oc-color-blue
+{
+	color: blue;
+	text-shadow: 3px 2px 4px black;
+    
+}
+.oc-color-white
+{
+	color: white;
+    text-shadow: 3px 2px 4px black;
+    
+}
+.oc-color-red
+{
+	color: red;
+	text-shadow: 3px 2px 4px black;
+    
+}

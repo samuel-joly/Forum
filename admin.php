@@ -2,14 +2,14 @@
 
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+		<link rel="stylesheet" type="text/css" href="css/admin.css"/>
 		<title>admin</title>
 	</head>
 
 
-	<body>
+	<body class="oc-body-admin">
 
-		    <header>
+		      <header>
 		    	<?php 
 		    	include("header.php"); 
 			
@@ -18,8 +18,11 @@
 		    	      	header('Location: connexion.php');
 		    	      }
 		       ?>
-	    </header>
-
-	</body>
-
-</html>
+		     </header>
+		            <main>
+		            	<section >
+		            		<article class="oc-article-admin1">
+		            			<a  href="gestion/admin-moderateur.php"><p>Moderateur et Administrateur</p></a>
+		            		</article>
+		            	</section>
+		            </main>

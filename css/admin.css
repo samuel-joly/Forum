@@ -1,0 +1,31 @@
+
+.oc-titre-admin
+{
+	text-align: center;
+}
+.oc-body-admin
+{
+	background-image: url("imgback/oc-back-ville2.jpg");
+	background-size: 100%;
+	color: white;
+}
+.oc-table-gestionadmin
+{
+	margin: auto;
+    background-color: #1b1502a8;
+    padding: 2%;
+    border: solid 2px #a11c1c;
+}
+.oc-admin-admin
+{
+	text-decoration: none;
+	color:red;
+}
+
+.oc-article-admin1
+{
+	background-color: #840a0a94;
+    width: 35%;
+    text-align: center;
+    padding: 1%;
+}

@@ -1,0 +1,31 @@
+
+.oc-form-connexion-forum
+{
+	    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 5%;
+}
+.oc-main-connexion-forum
+{
+	display: flex;
+    flex-direction: column;
+        height: 35em;
+}
+.oc-table-connexion-forum
+{
+	margin: auto;
+    background-color: #3b7da094;
+    color: white;
+    padding: 3%;
+    border: solid 2px #c1a5a5;
+    box-shadow: 5px 6px 16px black;
+}
+
+.oc-titre-connexion-forum
+{
+	    text-align: center;
+    color: #f3ecec;
+    text-shadow: 3px 3px 7px black;
+    margin-top: 4%;
+}

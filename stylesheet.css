@@ -7,8 +7,8 @@ body {
 
 main {
 	display:flex;
+	
 }
-
 .flex {
 	display:flex;
 }
@@ -44,14 +44,31 @@ main {
 
 header
 {
+<<<<<<< HEAD
 	
+=======
+/*
+	    display: flex;
+    justify-content: space-around;
+    background: #e4e4e4;
+    
+    width: 100%;
+    padding: 1%;
+    */
+>>>>>>> 3f12b389923666ea6e8baeb492bbb4ef92ee9d4e
 }
 
 .head-foot
 {
+<<<<<<< HEAD
 	padding:1em 1em 1em 1em;
 	background:#e4e4e4;
 	height:1.2em;
+=======
+
+	background:#e4e4e4;
+
+>>>>>>> 3f12b389923666ea6e8baeb492bbb4ef92ee9d4e
 }
 
 /*---------------------------------------- FORUM ----------------------------------------*/
@@ -269,6 +286,7 @@ header
 	transition:background 0.15s ease;
 	height:2em;
 	align-self:center;
+<<<<<<< HEAD
 }
 
 .disc-form input[type="submit"]:hover {
@@ -320,6 +338,14 @@ header
 }
 
 
+=======
+}
+
+.disc-form input[type="submit"]:hover {
+	background:#7093A7;
+}
+
+>>>>>>> 3f12b389923666ea6e8baeb492bbb4ef92ee9d4e
 .disc-form textarea{
 	min-width:80%;
 	min-height:40px;

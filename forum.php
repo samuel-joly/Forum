@@ -4,11 +4,14 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+
 		<title>Forum</title>
 	</head>
 
 	<body>
+		
 		<?php include("header.php");
+<<<<<<< HEAD
 			
 			$stmt = new PDO("mysql:host=localhost;dbname=forum","root","");
 			
@@ -22,6 +25,12 @@
 				header("location:forum.php");
 			}
 			
+=======
+				
+
+			$stmt = new PDO("mysql:host=localhost;dbname=forum","root","");
+			
+>>>>>>> 3f12b389923666ea6e8baeb492bbb4ef92ee9d4e
 			if(isset($_POST["submitDisc"])) {
 				if(!empty($_POST["discTitle"])){
 					$titre = escapeshellarg(htmlspecialchars($_POST["discTitle"]));
