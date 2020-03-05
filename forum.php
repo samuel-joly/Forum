@@ -4,12 +4,15 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+
 		<title>Forum</title>
 	</head>
 
 	<body>
+		
 		<?php include("header.php");
-			
+				
+
 			$stmt = new PDO("mysql:host=localhost;dbname=forum","root","");
 			
 			if(isset($_POST["submitDisc"])) {

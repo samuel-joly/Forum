@@ -7,8 +7,8 @@ body {
 
 main {
 	display:flex;
+	
 }
-
 .flex {
 	display:flex;
 }
@@ -44,7 +44,14 @@ main {
 
 header
 {
-	
+/*
+	    display: flex;
+    justify-content: space-around;
+    background: #e4e4e4;
+    
+    width: 100%;
+    padding: 1%;
+    */
 }
 
 .head-foot

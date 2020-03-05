@@ -8,6 +8,11 @@
 <head>
 	   <meta charset="utf-8">
      <link rel="stylesheet" type="text/css" href="css/inscription.css">
+     <link rel="stylesheet" type="text/css" href="css/oliv-header.css">
+     <link rel="stylesheet" type="text/css" href="stylesheet.css">
+
+
+
      <title>inscription</title>
 </head>
        <body class="oc-body-incription">
@@ -15,13 +20,12 @@
 
 					 <!--HEADER ADMIN -->
      <section class="oc-section-deventure">      
-     	<main>
-     		<header class="">
+     	
+     		
 <?php         
             	include ('header.php'); 
 ?>
-        	</header>
-             	<h1 class="oc-titre-inscr">Insrivez-vous !<h1>
+        	             	<h1 class="oc-titre-inscr">Insrivez-vous !<h1>
                         <form class="oc-form" method="POST" action=""  >
 <?php
 
@@ -94,7 +98,7 @@ if (!empty($_POST["submit"]))
  
 
 ?> 
-
+<main class="oc-main-inscription-forum">
  <table class="oc-tablinscri" class="oc-tableconnexionprofil ">
           <tr>
             <td>
@@ -132,3 +136,6 @@ if (!empty($_POST["submit"]))
 
 </section>
        </main>
+ <?php include('footer.php'); ?>
+</body>
+ </html>

@@ -2,8 +2,10 @@
 
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+		
+		<link rel="stylesheet" type="text/css" href="css/oliv-header.css">
 		<link rel="stylesheet" type="text/css" href="css/oliv_connexion.css"/>
+		<link rel="stylesheet" type="text/css" href="stylesheet.css"/>
 		<title>Connexion</title>
 	</head>
 
@@ -59,13 +61,7 @@
 				 </tbody>
 				</table>
 			</form>
-		</main>
-
-		<footer>
-		</footer>
-	</body>
-
-</html>
+	
 
 
 <?php
@@ -94,3 +90,9 @@
 		}
 	}
 ?>
+	</main>
+
+	<?php include('footer.php'); ?>
+	</body>
+
+</html>

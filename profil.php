@@ -14,9 +14,9 @@
 					 <!--HEADER ADMIN -->
      <section class="section-deventure">    
      <!-- HEADER-->  
-  <header class="oc-header-btp">
+  
            <?php include('header.php'); ?>  
-  </header>
+  
 
 <?php
 /////////////////////////////////////////////////////////////////////////variable session/////////////////////////////////////////
@@ -107,7 +107,7 @@ if ($id_droits_a == 3  OR $_SESSION['id'] == $_GET['id'])
 
   
 
-<main>
+<main class=" oc-main-inscription-forum" >
   <section class="oc-section-profil">
 <?php /////////////////////////////connexion bdd//////////////////////////////////////////////////////////////////
    $connexion=mysqli_connect("localhost","root","","forum");
@@ -356,7 +356,7 @@ $requet_admin_a = "SELECT id_droits FROM utilisateurs where id = '$id' ";
       <form method="POST" action="">
       <input class="oc-supression-user" type="submit" name="bouton-suprime-user" value="suprimé l'utilisateur">
     </form> 
-     </section>
+   
   <?php ///////////////////////////////////////////////////supression user par l'admin///////////////////////////////////////////////////////
       if (isset($_POST['bouton-suprime-user'])) 
       {
@@ -368,11 +368,13 @@ $requet_admin_a = "SELECT id_droits FROM utilisateurs where id = '$id' ";
   }
 }
 ?>
+ </main>
+     </section>
 
 
 
-</main>
   <!--//////////////////////////////////////////////////FOOTER///////////////////////////////////////////////////////////////////////-->
  <?php include('footer.php'); ?>
+ 
 </body>
 </html>

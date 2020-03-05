@@ -1,4 +1,13 @@
+body
+{
+  margin: 0;
+}
 
+.oc-main-inscription-forum
+{
+    display: flex;
+    flex-direction: column;
+}
 .oc-section-deventure
 {
 	background-image: url(imgback/oc-back-ville1.jpg) ;
@@ -9,7 +18,7 @@
 .oc-body-incription
 {
 	text-align: center;
-	
+	width: 100%;
 }
 .oc-tablinscri
 {
@@ -34,6 +43,7 @@
     color: #fff;
     box-shadow: 2px 2px black;
     height: 7%;
+    margin: auto;
 }   
 .oc-titre-inscr
 {
