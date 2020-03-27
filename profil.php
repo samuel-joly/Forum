@@ -4,7 +4,7 @@
 	<head>
 		   <meta charset="utf-8">
 		 <link rel="stylesheet" type="text/css" href="css/profil.css">
-		 <link rel="stylesheet" type="text/css" href="stylesheet.css">
+		  <link rel="stylesheet" type="text/css" href="css/oliv-header.css">
 		 <title>profil</title>
 	</head>
 		
@@ -80,8 +80,9 @@ $requet_admin_a = "SELECT id_droits FROM utilisateurs where id = ".$_SESSION["id
   $resultat_requet_admin_a = mysqli_fetch_assoc($connexion_requet_admin_a);
   $id_droits_a = $resultat_requet_admin_a['id_droits'];
  
+/////////////bug
 
-if ($id_droits_a == 3  OR $_SESSION['id'] == $_GET['id']) 
+if ($id_droits_a == 3  OR  $id == $_GET['id'] ) 
 {
  
 ?>

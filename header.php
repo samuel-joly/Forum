@@ -1,7 +1,11 @@
 <?php 
 	session_start();
 	include("function.php");
+if (isset($_SESSION['id'])) {
+	$id = $_SESSION['id'];
+}
 	
+
 	if(isset($_GET["deco"]))
 	{
 		session_destroy();
@@ -17,7 +21,7 @@
 	<?php } 
 	else { ?>
 
-		<a class="oc-color-blue" href="profil.php">profil</a>
+		<a class="oc-color-blue" href="profil.php?<?php echo"id=$id"; ?> ">profil</a>
 		<a class="oc-color-white" href="profil.php?deco=true">Deconnexion</a>
 	<?php } ?>
 		

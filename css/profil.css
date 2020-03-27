@@ -72,6 +72,10 @@ main
     font-family: cursive;
     text-shadow: 2px 2px #448dee;
 }
+footer
+{
+  text-align: center;
+}
 .oc-tablinscri
  {
 

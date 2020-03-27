@@ -1,4 +1,4 @@
-<footer class="flex  head-foot">
+<footer class="oc-footer" class="flex  head-foot">
 	<?php  if(!isset($_SESSION["id"])) { ?>
 		<a class="oc-color-blue" href="connexion.php">Connexion</a>
 		<a class="oc-color-white" href="inscription.php">Inscription</a>
