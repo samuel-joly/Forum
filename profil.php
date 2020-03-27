@@ -1,65 +1,50 @@
 
 
 <html>
-<head>
-	   <meta charset="utf-8">
-     <link rel="stylesheet" type="text/css" href="css/profil.css">
-     <link rel="stylesheet" type="text/css" href="stylesheet.css">
-
-     <title>profil</title>
-</head>
-       <body class="oc-body-accueil-btp">
+	<head>
+		   <meta charset="utf-8">
+		 <link rel="stylesheet" type="text/css" href="css/profil.css">
+		 <link rel="stylesheet" type="text/css" href="stylesheet.css">
+		 <title>profil</title>
+	</head>
+		
+	<body class="oc-body-accueil-btp">
   
+		
+				<?php include('header.php'); ?>  
+		
 
-					 <!--HEADER ADMIN -->
-     <section class="section-deventure">    
-     <!-- HEADER-->  
-  
-           <?php include('header.php'); ?>  
-  
+		
+    <section class="section-deventure">    
+		
 
-<?php
-/////////////////////////////////////////////////////////////////////////variable session/////////////////////////////////////////
- $connexion=mysqli_connect("localhost","root","","forum");
-$log=$_SESSION['login'];
-$id=$_SESSION['id'];////////////////////////////////////////securité verifie la session//////////////////////////////////////////////
+
+
+	<?php
+	
+	$connexion=mysqli_connect("localhost","root","","forum");
+	
+	
     if(!isset($_SESSION['login']))
     {
       header("location: connexion.php");
     }
-
-
-
-
-
-/////////////////////////////////////////si on clique sur la deconnexion////////////////////////////////////////////////////////////
-    if (!empty($_POST['deconection'])) 
-    {    
-    unset ( $_SESSION ['id'] );
-    unset ($_SESSION['login']); 
-    header("location: index.php");
-    }
-    ////////////////////////////////////////////////si on viste le profil/////////////////////////////
+	
     if(isset($_GET['id']) AND $_GET['id'] > 0) 
-    {
-     
-    $idvisiter =$_GET['id'];
-    $ocreqnom = ("SELECT pseudo FROM utilisateurs WHERE id = $idvisiter");
-    $fusionreq = mysqli_query($connexion,$ocreqnom);
-    $ocname = mysqli_fetch_assoc($fusionreq);
+    {     
+		$idvisiter =$_GET['id'];
+		$ocreqnom = ("SELECT pseudo FROM utilisateurs WHERE id = $idvisiter");
+		$fusionreq = mysqli_query($connexion,$ocreqnom);
+		$ocname = mysqli_fetch_assoc($fusionreq);
     }
-    /////////////////////////////////////////////si c'est profil perso///////////////////////////////////////
+	
     else
     {
-    $ocreqnom = ("SELECT pseudo FROM utilisateurs WHERE id = $id");
-    $fusionreq = mysqli_query($connexion,$ocreqnom);
-    $ocname = mysqli_fetch_assoc($fusionreq);
+		$ocreqnom = ("SELECT pseudo FROM utilisateurs WHERE id =".$_SESSION["id"]);
+		$fusionreq = mysqli_query($connexion,$ocreqnom);
+		$ocname = mysqli_fetch_assoc($fusionreq);
     }
 ?>
-
-
-
-    <!--titre-->
 
     <h1 class="oc-titreh">profil de <?php echo $ocname['pseudo']; ?></h1>
 <?php
@@ -67,33 +52,30 @@ $id=$_SESSION['id'];////////////////////////////////////////securité verifie la
 
 
    if(isset($_GET['id']) AND $_GET['id'] > 0)
-   {     ///////////////////////////////////////////////////select image du profil visiter////////////////////////////////
-    $reqimg = ("SELECT profilPic FROM utilisateurs WHERE id = $idvisiter");
+   {     
+		$reqimg = ("SELECT profilPic FROM utilisateurs WHERE id = $idvisiter");
    }
     else
-    {      ///////////////////////////////////////////////select image  de son profil//////////////////
-    $reqimg = ("SELECT profilPic FROM utilisateurs WHERE id = $id");
+    {   
+		$reqimg = ("SELECT profilPic FROM utilisateurs WHERE id =".$_SESSION["id"]);
     }
     $reqimgco = mysqli_query($connexion,$reqimg);
     $imgrecup = mysqli_fetch_array($reqimgco);
-          if (!empty($imgrecup[0])) 
-          {
-     # code...
+	  if (!empty($imgrecup[0])) 
+	  {
 ?>
      <img class = "oc-img-profil" src="<?php echo $imgrecup[0] ; ?>" > 
 <?php
      }
-         else
-         {
-           ?>
-           <img class = "oc-img-profil" src="profilPics/profil.jpg" >
+	 else
+	 {  ?>
+       <img class = "oc-img-profil" src="profilPics/profil.jpg" >
            <?php
-         }
-
-           ///////////////////////////////////////////VERIF DE DROITS //////////////////////////////////////////////////////
+	 }
+	 
 $id=$_SESSION['id'];
 
-$requet_admin_a = "SELECT id_droits FROM utilisateurs where id = '$id' ";
+$requet_admin_a = "SELECT id_droits FROM utilisateurs where id = ".$_SESSION["id"];
   $connexion_requet_admin_a = mysqli_query($connexion,$requet_admin_a);
   $resultat_requet_admin_a = mysqli_fetch_assoc($connexion_requet_admin_a);
   $id_droits_a = $resultat_requet_admin_a['id_droits'];
@@ -217,6 +199,9 @@ if ($id_droits_a == 3  OR $_SESSION['id'] == $_GET['id'])
                          
                                                       $inser= mysqli_query($connexion,$requeteupdate);
 
+                                                      header("location: profil.php");
+
+
                 ///////////////////////////////////////verif l'identité pour modifier le profil////////////////////////////////////////
                                                       $connexion=mysqli_connect("localhost","root","","forum");
                                                       $id_user = $_SESSION['id'];
@@ -226,6 +211,7 @@ if ($id_droits_a == 3  OR $_SESSION['id'] == $_GET['id'])
       
                                                       $id_user_profil = $result_id['id'];
                                                       header("location: profil.php?id=".$id_user_profil."");
+
                                                      }
                                                      else
                                                      {

@@ -11,15 +11,55 @@
 	<body>
 		
 		<?php include("header.php");
-				
 
+			
 			$stmt = new PDO("mysql:host=localhost;dbname=forum","root","");
+			if(isset($_GET["delete_topic"]))
+			{
+				unlink($stmt->query("SELECT image FROM topics WHERE id=".$_GET["delete_topic"])->fetch()[0]);
+				$stmt->query("DELETE FROM topics WHERE id =".$_GET["delete_topic"]);
+				foreach($stmt->query("SELECT id FROM discussions WHERE id_topic =".$_GET["delete_topic"])->fetchAll() as $related_disc)
+				{
+					$stmt->query("DELETE FROM discussions WHERE id =".$related_disc[0]);
+					
+					foreach($stmt->query("SELECT id FROM messages WHERE id_discussion =".$related_disc[0])->fetchAll() as $related_msg)
+					{
+						$stmt->query("DELETE FROM messages WHERE id =".$related_msg[0]);
+					}
+				}
+				header("location:forum.php");
+			}
+			
+			if(isset($_GET["delete_discussion"]))
+			{
+				$stmt->query("DELETE FROM discussion WHERE id =".$_GET["delete_discussion"]);
+				foreach($stmt->query("SELECT id FROM messages WHERE id_discussion =".$_GET["delete_discussion"])->fetchAll() as $related_msg)
+				{
+					$stmt->query("DELETE FROM messages WHERE id =".$related_msg);
+				}
+				header("location:forum.php");
+			}
+			
+			if(isset($_GET["delete_message"]))
+			{
+				$stmt->query("DELETE FROM messages WHERE id =".$_GET["delete_message"]);
+				header("location:forum.php");
+			}
+			if(isset($_POST["submitTopic"])) {
+				if(!empty($_POST["topicTitle"])){
+					$titre = htmlspecialchars($_POST["topicTitle"]);
+					$image = check_image($_FILES["topic_img"], $titre);
+					sql_request("INSERT INTO topics(`id`, `titre`, `id_createur`, `date_time`, `visibilite`, `image`)
+					VALUES (NULL,'".$titre."', '".$_SESSION["id"]."', NOW(), ".$_POST["visibility"].", '".$image."')");
+				}
+				header("location:forum.php");
+			}
 			
 			if(isset($_POST["submitDisc"])) {
-				if(!empty($_POST["discTitle"])){
-					$titre = escapeshellarg(htmlspecialchars($_POST["discTitle"]));
-					sql_request("INSERT INTO discussions(`id`, `titre`, `id_topic`, `id_createur`, `date_time`)
-					VALUES (NULL, $titre, '".$_GET["topic"]."', '".$_SESSION["id"]."', CURRENT_TIMESTAMP)");
+				if(!empty($_POST["discTitle"])) {
+					$titre= htmlspecialchars($_POST["discTitle"]); 
+					sql_request("INSERT INTO `discussions`(`id`, `titre`, `id_topic`, `id_createur`, `date_time`) 
+					VALUES (NULL,'".$titre."', '".$_GET["topic"]."', ".$_SESSION["id"]." , CURRENT_TIMESTAMP)");
 				}
 				header("location:forum.php?topic=".$_GET["topic"]);
 			}
@@ -73,25 +113,77 @@
 		<main>
 		
 			<?php
-
-				$topics = sql_request("SELECT titre, utilisateurs.pseudo, DATE_FORMAT(date_time,'%e %M %Y'), visibilite, topics.id 
-				FROM topics INNER JOIN utilisateurs ON topics.id_createur = utilisateurs.id 
-				ORDER BY date_time DESC", true);
+				
+				if(isset($_SESSION["id"]))
+				{
+					$topics = sql_request("SELECT titre, utilisateurs.pseudo, DATE_FORMAT(date_time,'%e %M %Y'), visibilite, topics.id 
+					FROM topics INNER JOIN utilisateurs ON topics.id_createur = utilisateurs.id 
+					WHERE visibilite <= (SELECT id_droits FROM utilisateurs WHERE id = ".$_SESSION["id"].")
+					ORDER BY date_time DESC", true);					
+				}
+				else
+				{
+					$topics = sql_request("SELECT titre, utilisateurs.pseudo, DATE_FORMAT(date_time,'%e %M %Y'), visibilite, topics.id 
+					FROM topics INNER JOIN utilisateurs ON topics.id_createur = utilisateurs.id 
+					WHERE visibilite <= 1
+					ORDER BY date_time DESC", true);	
+				}
 				
 				
 				echo "<div class='flexc forum-box' id='topic-box'>";
 				foreach($topics as $topic) {
 					echo create_forum($topic[0],$topic[1],$topic[2],$topic[4], "topic",$topic[3]);
 				}
+				
+				if(isset($_SESSION["id"]))
+				{
+					$droit = $stmt->query("SELECT nom FROM droits WHERE id = (SELECT id_droits FROM utilisateurs WHERE id =".$_SESSION["id"].")")->fetch()[0];
+					if($droit == "administrateur"  || $droit == "moderateur")
+					{ ?>
+						<form action="" method="post" class="topic-form flexc" enctype="multipart/form-data">
+							<span class="flex just-between">
+								<input type="text" name="topicTitle"/>
+								<label for="visibility">Visibilité</label>
+								<select name="visibility">
+									<?php
+										$droits = $stmt->query("SELECT id, nom FROM droits")->fetchAll();
+										foreach($droits as $infos)
+										{?>
+											<option value='<?= $infos[0] ?>'><?= $infos[1] ?></option>
+								<?php }
+									
+										
+									?>
+								</select>
+							</span>
+							<input type="file" name="topic_img"/>
+							<input type="submit" name="submitTopic" value="Envoyer"/>
+						</form>
+			<?php 	}
+				}
+				
 				echo "</div>";
 				
 				
 				if(isset($_GET["topic"])) {
 					
 					echo "<div class='flexc forum-box' id='discussion-box'>";
-					$discussions = sql_request("SELECT titre, utilisateurs.pseudo, DATE_FORMAT(date_time,'%e %M %Y %H:%i'), discussions.id
-					FROM discussions INNER JOIN utilisateurs ON discussions.id_createur = utilisateurs.id
-					WHERE id_topic = ".$_GET["topic"]." ORDER BY date_time ASC", true);
+				
+					if(isset($_SESSION["id"]))
+					{
+						$discussions = sql_request("SELECT titre, utilisateurs.pseudo, DATE_FORMAT(date_time,'%e %M %Y %H:%i'), discussions.id
+						FROM discussions INNER JOIN utilisateurs ON discussions.id_createur = utilisateurs.id
+						WHERE id_topic = ".$_GET["topic"]." AND  (SELECT id_droits FROM utilisateurs WHERE id = ".$_SESSION["id"].")
+						>= (SELECT visibilite FROM topics WHERE id=".$_GET["topic"].")
+						ORDER BY date_time ASC", true);												
+					}
+					else
+					{
+						$discussions = sql_request("SELECT titre, utilisateurs.pseudo, DATE_FORMAT(date_time,'%e %M %Y %H:%i'), discussions.id
+						FROM discussions INNER JOIN utilisateurs ON discussions.id_createur = utilisateurs.id
+						WHERE id_topic = ".$_GET["topic"]." AND  1 >= (SELECT visibilite FROM topics WHERE id=".$_GET["topic"].")
+						ORDER BY date_time ASC", true);
+					}
 					
 					
 					foreach($discussions as $discussion) {

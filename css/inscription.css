@@ -31,6 +31,8 @@ body
     color: white;
     text-align: center;
     box-shadow: 10px 11px 26PX #4caf7db3;
+    margin-bottom: 0;
+    width: 40%;
 }
 .buton-inscription
 {

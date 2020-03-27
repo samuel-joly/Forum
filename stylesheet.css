@@ -1,3 +1,8 @@
+html
+{
+	overflow-X:hidden;
+}
+
 body {
 	background:#73CFC9;
 	margin:0;
@@ -7,6 +12,7 @@ body {
 
 main {
 	display:flex;
+	min-height:90vh;
 	
 }
 .flex {
@@ -44,22 +50,41 @@ main {
 
 header
 {
-/*
-	    display: flex;
-    justify-content: space-around;
+	display: flex;
+	justify-content: space-around;
     background: #e4e4e4;
+   padding: 1%;
     
-    width: 100%;
-    padding: 1%;
-    */
 }
 
-.head-foot
+
+footer
 {
-
-	background:#e4e4e4;
-
+	justify-content: space-around;
+    background: #e4e4e4;
+    height: 4em;
+	align-items:center;
 }
+
+.oc-color-blue
+{
+	color: blue;
+	text-shadow: 3px 2px 4px black;
+    
+}
+.oc-color-white
+{
+	color: white;
+    text-shadow: 3px 2px 4px black;
+    
+}
+.oc-color-red
+{
+	color: red;
+	text-shadow: 3px 2px 4px black;
+    
+}
+
 
 /*---------------------------------------- FORUM ----------------------------------------*/
 
@@ -211,8 +236,32 @@ header
 	margin:auto;
 }
 
-.date{
-	
+.delete img{
+	width:1.2em;
+	height:1.2em;
+	background:red;
+	border-radius:0.2em;
+}
+
+.topic .delete img
+{
+	position:relative;
+	top:1em;
+	left:1em;
+}
+
+.discussion .delete img
+{
+	position:relative;
+	right:0.5em;	
+	top:0.5em;
+}
+
+.message .delete img
+{
+	position:relative;
+	left:0.5em;	
+	margin:0px;
 }
 
 .disc-profil {
@@ -282,6 +331,59 @@ header
 	background:#7093A7;
 }
 
+.topic-form
+{
+	display:flex;
+	
+}
+
+.topic-form input[type="text"]{
+	width:80%;
+	height:20px;
+	font-size:1.2em;
+	border-radius:7.5px;
+	border:0px;
+	margin:10px;
+}
+
+.topic-form input[type="file"]{
+	margin:auto;
+	align-self:center;
+}
+
+.topic-form input[type="submit"] {
+	background-color:#449DD1;
+	border-radius:5px;
+	border:0px;
+	font-size:1.2em;
+	margin-top:1px;
+	cursor:pointer;
+	transition:background 0.15s ease;
+	height:2em;
+	width:90%;
+	margin:auto;
+	margin-top:0.5em;
+	align-self:center;
+}
+
+.topic-form label
+{
+	align-self:center;
+}
+
+.topic-form input[type="submit"]:hover {
+	background:#7093A7;
+}
+
+
+
+}
+
+.disc-form input[type="submit"]:hover {
+	background:#7093A7;
+}
+
+
 .disc-form textarea{
 	min-width:80%;
 	min-height:40px;
@@ -336,3 +438,132 @@ header
 	width:80%;
 	margin-left:1em;
 }
+
+/*----------------------------------Profil---------------------------------*/
+
+
+
+main
+{
+}
+.oc-supression-user
+{
+  color: red;
+}
+.oc-img-profil
+{
+	border: solid #07829ade 3PX;
+    width: 14%;
+    height: 26%;
+    border-radius: 100%;
+    box-shadow: #0039a2 5px 5px 11PX;
+}
+.oc-section-profil
+{
+  margin: auto;
+}
+
+.oc-main-inscription-forum
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.oc-body-incription
+{
+	text-align: center;
+	width: 100%;
+}
+
+
+.section-deventure
+{
+	    text-align: center;
+	    background-image: url(imgback/backprofil.jpg);
+	   
+	    height: 100%;
+}
+.oc-tablinscri
+{
+    width: 110%;
+    margin: auto;
+    background-color: #091114a1;
+    padding: 3%;
+    border: #07829ade solid 3px;
+    margin-top: 3%;
+    box-shadow: #0039a2 5px 5px 11PX;
+    color: white;
+}
+.buton-inscription
+{
+    width: 35%;
+    border: none;
+    padding: 6px 0 6px 0;
+    border-radius: 8px;
+    background: #00bcd4ba;
+    font: bold 13px Arial;
+    color: #fff;
+    box-shadow: 2px 2px black;
+}
+.oc-zindex-profil
+{
+
+}
+.oc-titreh
+{
+	    color: white;
+        font-size: 30px;
+    font-family: cursive;
+    text-shadow: 2px 2px #448dee;
+}
+.oc-tablinscri
+ {
+
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+    -webkit-animation-duration: 1s;
+    animation-duration: 3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+  
+  @-webkit-keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      -webkit-transform: translate3d(0, -100%, 0);
+      transform: translate3d(0, -100%, 0);
+    }
+    100% {
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
+    }
+  }
+  
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      -webkit-transform: translate3d(0, -100%, 0);
+      transform: translate3d(0, -100%, 0);
+    }
+    100% {
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
+    }
+  }
+  
+  @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+  @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+}
+.oc-zindex-profil-definir-admin
+{
+  background-color: #df0e0e;
+ height: 28px;
+    border: solid 2px #3F51B5;
+    box-shadow: 2px 2px 4px #1c568f;
+    color: white;
+}
+
