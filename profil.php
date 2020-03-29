@@ -3,7 +3,7 @@
 <html>
 	<head>
 		   <meta charset="utf-8">
-		 <link rel="stylesheet" type="text/css" href="css/profil.css">
+
 		 <link rel="stylesheet" type="text/css" href="stylesheet.css">
 		 <title>profil</title>
 	</head>

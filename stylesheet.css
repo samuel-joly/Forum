@@ -440,21 +440,16 @@ footer
 }
 
 /*----------------------------------Profil---------------------------------*/
-
-
-
-main
-{
-}
 .oc-supression-user
 {
   color: red;
 }
+
 .oc-img-profil
 {
 	border: solid #07829ade 3PX;
-    width: 14%;
-    height: 26%;
+    width: 10%;
+    /* height: 30%; */
     border-radius: 100%;
     box-shadow: #0039a2 5px 5px 11PX;
 }
@@ -463,10 +458,19 @@ main
   margin: auto;
 }
 
+.oc-body-accueil-btp
+{
+	background-image: url(css/imgback/backprofil.jpg);
+	background-size:cover;
+}
+
 .oc-main-inscription-forum
 {
     display: flex;
     flex-direction: column;
+	height:fit-content;
+	min-height:50vh;
+	margin-bottom:19vh;
 }
 
 .oc-body-incription
@@ -478,10 +482,8 @@ main
 
 .section-deventure
 {
-	    text-align: center;
-	    background-image: url(imgback/backprofil.jpg);
-	   
-	    height: 100%;
+	text-align: center;
+	height:fit-content;
 }
 .oc-tablinscri
 {

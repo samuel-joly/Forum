@@ -1,6 +1,14 @@
-
+body
+{
+	background-image: url(imgback/backprofil.jpg);
+	background-size:cover;
+	overflow-x:hidden;
+	overflow-y:hidden;
+}
 main
 {
+	height:10vh;
+	width:100%;
 }
 .oc-supression-user
 {
@@ -17,27 +25,11 @@ main
 .oc-section-profil
 {
   margin: auto;
+  height:fit-content;
 }
-
-.oc-main-inscription-forum
-{
-    display: flex;
-    flex-direction: column;
-}
-
-.oc-body-incription
-{
-	text-align: center;
-	width: 100%;
-}
-
-
 .section-deventure
 {
-	    text-align: center;
-	    background-image: url(imgback/backprofil.jpg);
-	   
-	    height: 100%;
+	text-align: center;
 }
 .oc-tablinscri
 {
