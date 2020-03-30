@@ -9,7 +9,7 @@
 	   <meta charset="utf-8">
      <link rel="stylesheet" type="text/css" href="css/inscription.css">
      <link rel="stylesheet" type="text/css" href="css/oliv-header.css">
-     <link rel="stylesheet" type="text/css" href="stylesheet.css">
+     
 
 
 

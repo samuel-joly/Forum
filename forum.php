@@ -45,6 +45,7 @@
 				$stmt->query("DELETE FROM messages WHERE id =".$_GET["delete_message"]);
 				header("location:forum.php");
 			}
+		
 			if(isset($_POST["submitTopic"])) {
 				if(!empty($_POST["topicTitle"])){
 					$titre = htmlspecialchars($_POST["topicTitle"]);
